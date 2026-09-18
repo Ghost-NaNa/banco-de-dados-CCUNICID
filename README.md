@@ -31,69 +31,91 @@ Como evidências da organização e do acesso do grupo, serão apresentados:
 
 **Principais processos mapeados:** o sistema contempla o cadastro e gerenciamento de frequentadores (alunos), funcionários, planos e matrículas, além do controle de pagamentos e acessos/frequência. Também são realizados processos relacionados ao acompanhamento físico e ao treinamento dos alunos, como o registro e gerenciamento de avaliações físicas e a criação, consulta, alteração e exclusão de fichas de treino pelos instrutores. O atendente pode consultar informações de planos, matrículas, pagamentos e frequência, enquanto o instrutor gerencia as fichas de treino e avaliações físicas. Já o aluno pode consultar seu plano, matrícula, ficha de treino e avaliação física.
 
-### Requisitos do Sistema
+## Requisitos Funcionais
 
-#### Requisitos Funcionais
+1. *Cadastrar frequentadores*
 
-| Código | Requisito |
-|--------|-----------|
-| RF01 | O sistema deve permitir cadastrar frequentadores. |
-| RF02 | O sistema deve permitir consultar os dados dos frequentadores. |
-| RF03 | O sistema deve permitir atualizar os dados dos frequentadores. |
-| RF04 | O sistema deve permitir registrar matrículas. |
-| RF05 | O sistema deve permitir consultar as matrículas cadastradas. |
-| RF06 | O sistema deve permitir cadastrar planos de musculação. |
-| RF07 | O sistema deve permitir associar uma matrícula a um plano. |
-| RF08 | O sistema deve permitir registrar avaliações físicas. |
-| RF09 | O sistema deve permitir registrar peso, altura e percentual de gordura na avaliação física. |
-| RF10 | O sistema deve permitir registrar observações médicas relacionadas à avaliação física. |
-| RF11 | O sistema deve permitir cadastrar funcionários. |
-| RF12 | O sistema deve permitir cadastrar fichas de treino. |
-| RF13 | O sistema deve permitir registrar o objetivo do treino. |
-| RF14 | O sistema deve permitir registrar a data de criação e a data de revisão da ficha de treino. |
-| RF15 | O sistema deve permitir consultar e atualizar as fichas de treino dos frequentadores. |
-| RF16 | O sistema deve permitir consultar o histórico de avaliações físicas do frequentador. |
+   * O sistema deve permitir cadastrar o ID, nome, CPF e informações de pagamento do frequentador.
 
-#### Requisitos Não Funcionais
+2. *Cadastrar matrículas*
 
-| Código | Requisito |
-|--------|-----------|
-| RNF01 | O sistema deve possuir uma interface simples e de fácil utilização. |
-| RNF02 | O sistema deve garantir a segurança das informações cadastradas. |
-| RNF03 | O acesso às informações deve ser realizado somente por usuários autorizados. |
-| RNF04 | O sistema deve manter os dados organizados e consistentes. |
-| RNF05 | O sistema deve permitir consultas aos registros de maneira eficiente. |
-| RNF06 | O sistema deve possibilitar a atualização dos dados sem comprometer os registros existentes. |
-| RNF07 | O sistema deve possuir mecanismos de autenticação para controle de acesso. |
+   * O sistema deve permitir registrar a matrícula de um frequentador, incluindo data de início, data final e status.
 
-### Regras de Negócio
+3. *Cadastrar planos*
 
-- **Regras operacionais:**
+   * O sistema deve permitir cadastrar planos e seus respectivos nomes ou descrições.
 
-**RN01.** Todo frequentador deve possuir seus dados básicos cadastrados no sistema.
+4. *Relacionar frequentadores aos planos*
 
-**RN02.** Cada matrícula deve estar associada a um único frequentador.
+   * O sistema deve permitir associar uma matrícula a um plano contratado.
 
-**RN03.** Cada matrícula deve estar associada a um plano.
+5. *Cadastrar fichas de treino*
 
-**RN04.** Uma matrícula deve possuir data de início, data final e status.
+   * O sistema deve permitir criar fichas de treino contendo data de criação, data de revisão e objetivo.
 
-**RN05.** Um frequentador pode possuir registros de avaliações físicas.
+6. *Relacionar fichas de treino aos frequentadores*
 
-**RN06.** Cada avaliação física deve estar associada a um único frequentador.
+   * O sistema deve permitir associar uma ficha de treino a um frequentador.
 
-**RN07.** A avaliação física deve possuir uma data de realização.
+7. *Cadastrar funcionários*
 
-**RN08.** Os dados da avaliação física podem incluir peso, altura, percentual de gordura e observações médicas.
+   * O sistema deve permitir cadastrar funcionários com nome, CPF, cargo, especialidade e senha.
 
-**RN09.** Cada ficha de treino deve estar associada a um frequentador.
+8. *Relacionar funcionários às fichas de treino*
 
-**RN10.** A ficha de treino deve possuir objetivo, data de criação e data de revisão.
+   * O sistema deve permitir identificar o funcionário responsável pela elaboração da ficha de treino.
 
-**RN11.** As avaliações físicas devem ser realizadas por funcionários responsáveis pelo processo.
+9. *Cadastrar avaliações físicas*
 
-**RN12.** Os dados registrados devem ser mantidos de forma organizada para permitir consultas e atualizações posteriores.
+   * O sistema deve permitir registrar avaliações físicas com data, peso, altura, percentual de gordura e observações médicas.
 
+10. *Manter histórico de avaliações*
+
+* O sistema deve permitir acompanhar as avaliações físicas realizadas ao longo do tempo.
+
+11. *Controlar situação da matrícula*
+
+* O sistema deve permitir consultar e atualizar o status da matrícula.
+
+12. *Controlar informações de pagamento*
+
+* O sistema deve permitir registrar e consultar a situação do pagamento do aluno.
+
+---
+
+## Requisitos Não Funcionais
+
+1. *Segurança*
+
+   * As senhas dos funcionários devem ser protegidas e acessíveis somente por usuários autorizados.
+
+2. *Integridade dos dados*
+
+   * Cada frequentador, funcionário, matrícula, plano, ficha de treino e avaliação deve possuir um identificador único.
+
+3. *Identificação*
+
+   * O CPF deve ser utilizado para identificar o frequentador e o funcionário.
+
+4. *Confiabilidade*
+
+   * As informações cadastradas devem ser armazenadas de forma consistente para evitar perda ou alteração indevida dos dados.
+
+5. *Usabilidade*
+
+   * O sistema deve permitir que os usuários realizem cadastros e consultas de maneira organizada e compreensível.
+
+6. *Privacidade*
+
+   * Informações pessoais e observações médicas devem ser acessíveis somente aos usuários autorizados.
+
+7. *Manutenibilidade*
+
+   * O sistema deve permitir a atualização das informações de matrícula, ficha de treino, avaliação física e demais registros.
+
+8. *Rastreabilidade*
+
+   * As datas de criação, revisão, início, encerramento e avaliação devem ser armazenadas para permitir o acompanhamento dos registros.
 - **Restrições organizacionais:**
 
 O sistema deve considerar a necessidade de preservar a privacidade das informações dos frequentadores e funcionários. Os dados devem ser acessados somente por pessoas autorizadas pela organização.
