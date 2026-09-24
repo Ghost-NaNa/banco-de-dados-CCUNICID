@@ -1,5 +1,12 @@
 # Modelagem de Banco de Dados para a X Personal Studio
 
+## Grupo
+ - Guilherme Lima de Souza
+ - Guilherme Miranda Sena
+ - Guilherme Vilela Frassão
+ - Nathan de Oliveira Tavares
+ - Kaue Dogani Moreira
+
 ## Introdução
 
 A organização e o controle adequado das informações são importantes para o funcionamento de uma academia, principalmente quando existem diversos frequentadores, funcionários, planos, matrículas, avaliações físicas e fichas de treino.
