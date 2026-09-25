@@ -174,7 +174,7 @@ Também são consideradas as necessidades de controle de acesso e proteção dos
 ### Diagrama Entidade-Relacionamento (DER)
 
 Para acessar o Diagrama Entidade-Relacionamento, acesse:
-[DER](./diagramas/Conceitual_1.png)
+[DER](diagramas/conceitual_1.1.png)
 
 ### Justificativa Técnica
 
