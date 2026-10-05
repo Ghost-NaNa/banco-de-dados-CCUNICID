@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>BlueFit | Dicionário de Dados</title>
+    <title>X personal | Dicionário de Dados</title>
 
     <style>
 
