@@ -1,22 +1,33 @@
-# Modelagem de Banco de Dados para a X Personal Studio
+# Modelagem de Banco de Dados para a X Personal Estudio
+
+## Grupo
+ - Guilherme Lima de Souza (RGM - 47622814)
+ - Guilherme Miranda Sena (RGM - 47401672)
+ - Guilherme Vilela Frassão (RGM - 47911522)
+ - Nathan de Oliveira Tavares (RGM - 47916966)
+ - Kaue Dogani Moreira (RGM - 47312998) 
+
+---
 
 ## Introdução
 
 A organização e o controle adequado das informações são importantes para o funcionamento de uma academia, principalmente quando existem diversos frequentadores, funcionários, planos, matrículas, avaliações físicas e fichas de treino.
 
-A X Personal Studio, localizada em São Paulo - SP, atua no segmento de atividades físicas, com foco na prática de musculação. A academia possui aproximadamente 15 funcionários e oferece planos destinados aos frequentadores.
+A X Personal Estudio, localizada em São Paulo - SP, atua no segmento de atividades físicas, com foco na prática de musculação. A academia possui aproximadamente 15 funcionários e oferece planos destinados aos frequentadores.
 
 Atualmente, parte das informações relacionadas aos frequentadores e aos seus treinos é registrada por meio de fichas físicas em papel. Esse tipo de controle pode dificultar a organização, atualização, consulta e manutenção dos dados.
 
-Diante desse cenário, o presente projeto tem como objetivo realizar a modelagem conceitual de um sistema de gerenciamento de informações para a X Personal Studio. O modelo busca representar os principais dados e processos da organização, considerando frequentadores, funcionários, matrículas, planos, fichas de treino e avaliações físicas.
+Diante desse cenário, o presente projeto tem como objetivo realizar a modelagem conceitual de um sistema de gerenciamento de informações para a X Personal Estudio. O modelo busca representar os principais dados e processos da organização, considerando frequentadores, funcionários, matrículas, planos, fichas de treino e avaliações físicas.
 
 O projeto está delimitado à etapa de levantamento e organização dos requisitos e à elaboração do Modelo Entidade-Relacionamento (DER), não contemplando, nesta etapa, a implementação do banco de dados ou o desenvolvimento completo do sistema.
+
+---
 
 ## Desenvolvimento
 
 ### Caracterização da Organização
 
-Para o desenvolvimento deste projeto, escolhemos a academia de musculação **X Personal Estudio**. A academia é de pequeno porte e atende principalmente ao público do bairro, contando com aproximadamente **15 funcionários**, entre instrutores, recepcionistas e equipe de limpeza, além de cerca de **200 frequentadores inscritos**.
+Para o desenvolvimento deste projeto, escolhemos a academia de musculação **X Personal EEstudio**. A academia é de pequeno porte e atende principalmente ao público do bairro, contando com aproximadamente **15 funcionários**, entre instrutores, recepcionistas e equipe de limpeza, além de cerca de **200 frequentadores inscritos**.
 
 A principal problemática identificada é a **ausência de um sistema específico para o gerenciamento das informações**, dificultando a organização e o controle dos dados da academia.
 
@@ -27,73 +38,110 @@ Como evidências da organização e do acesso do grupo, serão apresentados:
 ![comprovacao](./dicio_dados/imgs/dentro2.jpeg)
 ![comprovacao](./dicio_dados/imgs/fachada.jpeg)
 
+---
+
 ### Processos de Negócio
 
 **Principais processos mapeados:** o sistema contempla o cadastro e gerenciamento de frequentadores (alunos), funcionários, planos e matrículas, além do controle de pagamentos e acessos/frequência. Também são realizados processos relacionados ao acompanhamento físico e ao treinamento dos alunos, como o registro e gerenciamento de avaliações físicas e a criação, consulta, alteração e exclusão de fichas de treino pelos instrutores. O atendente pode consultar informações de planos, matrículas, pagamentos e frequência, enquanto o instrutor gerencia as fichas de treino e avaliações físicas. Já o aluno pode consultar seu plano, matrícula, ficha de treino e avaliação física.
 
-### Requisitos do Sistema
+---
 
-#### Requisitos Funcionais
+### SGBD e Collation
 
-| Código | Requisito |
-|--------|-----------|
-| RF01 | O sistema deve permitir cadastrar frequentadores. |
-| RF02 | O sistema deve permitir consultar os dados dos frequentadores. |
-| RF03 | O sistema deve permitir atualizar os dados dos frequentadores. |
-| RF04 | O sistema deve permitir registrar matrículas. |
-| RF05 | O sistema deve permitir consultar as matrículas cadastradas. |
-| RF06 | O sistema deve permitir cadastrar planos de musculação. |
-| RF07 | O sistema deve permitir associar uma matrícula a um plano. |
-| RF08 | O sistema deve permitir registrar avaliações físicas. |
-| RF09 | O sistema deve permitir registrar peso, altura e percentual de gordura na avaliação física. |
-| RF10 | O sistema deve permitir registrar observações médicas relacionadas à avaliação física. |
-| RF11 | O sistema deve permitir cadastrar funcionários. |
-| RF12 | O sistema deve permitir cadastrar fichas de treino. |
-| RF13 | O sistema deve permitir registrar o objetivo do treino. |
-| RF14 | O sistema deve permitir registrar a data de criação e a data de revisão da ficha de treino. |
-| RF15 | O sistema deve permitir consultar e atualizar as fichas de treino dos frequentadores. |
-| RF16 | O sistema deve permitir consultar o histórico de avaliações físicas do frequentador. |
+- **SGBD:** MySQL 8.0 (versão prevista, a confirmar).
+- **Banco de dados:** `db_gym_list`
+- **Character Set:** `utf8mb4` (previsto).
+- **Collation:** `utf8mb4_0900_ai_ci` (prevista).
 
-#### Requisitos Não Funcionais
+O banco de dados é identificado pelo nome `db_gym_list`. A definição do conjunto de caracteres e da collation deverá ser aplicada na configuração do banco, garantindo consistência no armazenamento, na comparação e na ordenação de textos.
 
-| Código | Requisito |
-|--------|-----------|
-| RNF01 | O sistema deve possuir uma interface simples e de fácil utilização. |
-| RNF02 | O sistema deve garantir a segurança das informações cadastradas. |
-| RNF03 | O acesso às informações deve ser realizado somente por usuários autorizados. |
-| RNF04 | O sistema deve manter os dados organizados e consistentes. |
-| RNF05 | O sistema deve permitir consultas aos registros de maneira eficiente. |
-| RNF06 | O sistema deve possibilitar a atualização dos dados sem comprometer os registros existentes. |
-| RNF07 | O sistema deve possuir mecanismos de autenticação para controle de acesso. |
+---
 
-### Regras de Negócio
+### Requisitos Funcionais
 
-- **Regras operacionais:**
+1. *Cadastrar frequentadores*
 
-**RN01.** Todo frequentador deve possuir seus dados básicos cadastrados no sistema.
+   * O sistema deve permitir cadastrar o ID, nome, CPF e informações de pagamento do frequentador.
 
-**RN02.** Cada matrícula deve estar associada a um único frequentador.
+2. *Cadastrar matrículas*
 
-**RN03.** Cada matrícula deve estar associada a um plano.
+   * O sistema deve permitir registrar a matrícula de um frequentador, incluindo data de início, data final e status.
 
-**RN04.** Uma matrícula deve possuir data de início, data final e status.
+3. *Cadastrar planos*
 
-**RN05.** Um frequentador pode possuir registros de avaliações físicas.
+   * O sistema deve permitir cadastrar planos e seus respectivos nomes ou descrições.
 
-**RN06.** Cada avaliação física deve estar associada a um único frequentador.
+4. *Relacionar frequentadores aos planos*
 
-**RN07.** A avaliação física deve possuir uma data de realização.
+   * O sistema deve permitir associar uma matrícula a um plano contratado.
 
-**RN08.** Os dados da avaliação física podem incluir peso, altura, percentual de gordura e observações médicas.
+5. *Cadastrar fichas de treino*
 
-**RN09.** Cada ficha de treino deve estar associada a um frequentador.
+   * O sistema deve permitir criar fichas de treino contendo data de criação, data de revisão e objetivo.
 
-**RN10.** A ficha de treino deve possuir objetivo, data de criação e data de revisão.
+6. *Relacionar fichas de treino aos frequentadores*
 
-**RN11.** As avaliações físicas devem ser realizadas por funcionários responsáveis pelo processo.
+   * O sistema deve permitir associar uma ficha de treino a um frequentador.
 
-**RN12.** Os dados registrados devem ser mantidos de forma organizada para permitir consultas e atualizações posteriores.
+7. *Cadastrar funcionários*
 
+   * O sistema deve permitir cadastrar funcionários com nome, CPF, cargo, especialidade e senha.
+
+8. *Relacionar funcionários às fichas de treino*
+
+   * O sistema deve permitir identificar o funcionário responsável pela elaboração da ficha de treino.
+
+9. *Cadastrar avaliações físicas*
+
+   * O sistema deve permitir registrar avaliações físicas com data, peso, altura, percentual de gordura e observações médicas.
+
+10. *Manter histórico de avaliações*
+
+* O sistema deve permitir acompanhar as avaliações físicas realizadas ao longo do tempo.
+
+11. *Controlar situação da matrícula*
+
+* O sistema deve permitir consultar e atualizar o status da matrícula.
+
+12. *Controlar informações de pagamento*
+
+* O sistema deve permitir registrar e consultar a situação do pagamento do aluno.
+
+---
+
+### Requisitos Não Funcionais
+
+1. *Segurança*
+
+   * As senhas dos funcionários devem ser protegidas e acessíveis somente por usuários autorizados.
+
+2. *Integridade dos dados*
+
+   * Cada frequentador, funcionário, matrícula, plano, ficha de treino e avaliação deve possuir um identificador único.
+
+3. *Identificação*
+
+   * O CPF deve ser utilizado para identificar o frequentador e o funcionário.
+
+4. *Confiabilidade*
+
+   * As informações cadastradas devem ser armazenadas de forma consistente para evitar perda ou alteração indevida dos dados.
+
+5. *Usabilidade*
+
+   * O sistema deve permitir que os usuários realizem cadastros e consultas de maneira organizada e compreensível.
+
+6. *Privacidade*
+
+   * Informações pessoais e observações médicas devem ser acessíveis somente aos usuários autorizados.
+
+7. *Manutenibilidade*
+
+   * O sistema deve permitir a atualização das informações de matrícula, ficha de treino, avaliação física e demais registros.
+
+8. *Rastreabilidade*
+
+   * As datas de criação, revisão, início, encerramento e avaliação devem ser armazenadas para permitir o acompanhamento dos registros.
 - **Restrições organizacionais:**
 
 O sistema deve considerar a necessidade de preservar a privacidade das informações dos frequentadores e funcionários. Os dados devem ser acessados somente por pessoas autorizadas pela organização.
@@ -104,11 +152,13 @@ Além disso, informações utilizadas como exemplos na documentação do projeto
 Para acessar o Diagrama Entidade-Relacionamento, acesse:
 [Dicionário de dados](./dicio_dados/dicionario.md)
 
+---
+
 ### Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
 
 - **Entidades reconhecidas:**
 
-**Frequentador:** representa a pessoa que utiliza os serviços oferecidos pela X Personal Studio. É a entidade central do modelo, estando relacionada às matrículas, fichas de treino e avaliações físicas.
+**Frequentador:** representa a pessoa que utiliza os serviços oferecidos pela X Personal Estudio. É a entidade central do modelo, estando relacionada às matrículas, fichas de treino e avaliações físicas.
 
 **Matrícula:** representa o vínculo do frequentador com a academia, registrando informações como data de início, data final e status.
 
@@ -142,14 +192,18 @@ O modelo considera que os registros devem manter seus vínculos entre as entidad
 
 Também são consideradas as necessidades de controle de acesso e proteção dos dados pessoais armazenados no sistema.
 
+---
+
 ### Diagrama Entidade-Relacionamento (DER)
 
 Para acessar o Diagrama Entidade-Relacionamento, acesse:
-[DER](./diagramas/Conceitual_1.png)
+[DER](diagramas/conceitual_1.1.png)
+
+---
 
 ### Justificativa Técnica
 
-A modelagem foi desenvolvida considerando os principais processos e informações identificados na X Personal Studio.
+A modelagem foi desenvolvida considerando os principais processos e informações identificados na X Personal Estudio.
 
 A entidade **Frequentador** foi definida como uma das principais entidades do modelo por representar as pessoas que utilizam os serviços da academia. A partir dela são estabelecidos relacionamentos com matrícula, ficha de treino e avaliação física.
 
@@ -167,6 +221,8 @@ A utilização de entidades separadas reduz a repetição de informações e per
 
 As cardinalidades foram definidas de acordo com os vínculos representados no modelo, buscando garantir que as informações permaneçam relacionadas de maneira coerente entre frequentadores, matrículas, planos, fichas de treino, funcionários e avaliações físicas.
 
+---
+
 ### Uso de Inteligência Artificial
 
 Durante a elaboração do projeto, foi utilizada a ferramenta **ChatGPT** como apoio à organização e revisão da documentação do trabalho.
@@ -177,7 +233,13 @@ Durante a elaboração do projeto, foi utilizada a ferramenta **ChatGPT** como a
 | **Motivação** | Utilizar a ferramenta como apoio para organizar as informações levantadas pelo grupo e estruturar a documentação de acordo com o modelo de entrega proposto. |
 | **Prompt(s) utilizados** | "Chat me ajuda a montar o README do GitHub"; "monta o texto completo por favor com as suas sugestões". |
 | **Resposta recebida** | A ferramenta auxiliou na organização das informações fornecidas pelo grupo, sugerindo uma estrutura para caracterização da organização, processos, requisitos funcionais e não funcionais, regras de negócio, dicionário de dados e justificativa técnica. |
-| **Fontes consultadas e verificadas** | As informações específicas sobre a X Personal Studio foram fornecidas pelo grupo a partir do levantamento realizado na organização. As sugestões geradas pela IA devem ser conferidas pelo grupo antes da versão final. |
+| **Fontes consultadas e verificadas** | As informações específicas sobre a X Personal Estudio foram fornecidas pelo grupo a partir do levantamento realizado na organização. As sugestões geradas pela IA devem ser conferidas pelo grupo antes da versão final. |
 | **Trechos rejeitados ou corrigidos** | Informações não confirmadas pela organização não devem ser apresentadas como fatos. O grupo deve revisar e substituir ou remover qualquer sugestão que não corresponda aos processos reais observados. |
 | **Justificativa da escolha final** | As sugestões consideradas compatíveis com a organização e com o DER foram adaptadas e utilizadas na documentação. As decisões finais permanecem sob responsabilidade do grupo. |
 | **Reflexão crítica** | A IA foi utilizada como ferramenta de apoio e não como fonte principal das informações da organização. Suas sugestões podem conter generalizações ou informações que não correspondam à realidade observada. Por isso, os requisitos, processos e regras de negócio devem ser validados pelo grupo com base na pesquisa de campo. |
+
+---
+
+### Versão
+Versão: 0.1.0
+Status: Em desenvolviment0
