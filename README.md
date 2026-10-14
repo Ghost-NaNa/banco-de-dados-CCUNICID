@@ -33,16 +33,20 @@ A principal problemática identificada é a **ausência de um sistema específic
 
 A instituição foi escolhida pela facilidade de comunicação com os envolvidos e pela **possibilidade de expansão do projeto**, além de apresentar relações entre diferentes informações, tornando-a um bom caso para o desenvolvimento de um banco de dados.
 
-Como evidências da organização e do acesso do grupo, serão apresentados:
-![comprovacao](./dicio_dados/imgs/dentro1.jpeg)
-![comprovacao](./dicio_dados/imgs/dentro2.jpeg)
-![comprovacao](./dicio_dados/imgs/fachada.jpeg)
+## 1. Caracterização da Organização
 
 ---
 
 ### Processos de Negócio
+- **Nome e natureza da organização:** X Personal Studio — academia de musculação, com fins lucrativos, situada em São Paulo - SP.
+- **Contexto e porte:** organização de pequeno porte, com aproximadamente 15 funcionários (entre instrutores, recepcionistas e equipe de limpeza) e cerca de 200 frequentadores inscritos. O volume de atividades inclui matrículas, renovações de plano, atendimentos diários de treino e avaliações físicas periódicas.
+- **Problemas e necessidades identificados:** a principal problemática é a **ausência de um sistema específico para o gerenciamento das informações**. Parte dos dados de frequentadores e de seus treinos ainda é registrada em fichas físicas de papel, dificultando a organização, atualização, consulta e manutenção dessas informações.
+- **Justificativa da escolha:** a organização foi escolhida pela facilidade de comunicação com os envolvidos e pelo acesso direto do grupo ao local, além de apresentar relações claras entre diferentes tipos de informação (frequentadores, planos, matrículas, treinos e avaliações), o que a torna um bom caso para a modelagem de um banco de dados nesta etapa do curso.
+- **Evidências da organização:**
 
-**Principais processos mapeados:** o sistema contempla o cadastro e gerenciamento de frequentadores (alunos), funcionários, planos e matrículas, além do controle de pagamentos e acessos/frequência. Também são realizados processos relacionados ao acompanhamento físico e ao treinamento dos alunos, como o registro e gerenciamento de avaliações físicas e a criação, consulta, alteração e exclusão de fichas de treino pelos instrutores. O atendente pode consultar informações de planos, matrículas, pagamentos e frequência, enquanto o instrutor gerencia as fichas de treino e avaliações físicas. Já o aluno pode consultar seu plano, matrícula, ficha de treino e avaliação física.
+  ![comprovação — fachada](./dicio_dados/imgs/fachada.jpeg)
+  ![comprovação — interior 1](./dicio_dados/imgs/dentro1.jpeg)
+  ![comprovação — interior 2](./dicio_dados/imgs/dentro2.jpeg)
 
 ---
 
@@ -143,6 +147,9 @@ O banco de dados é identificado pelo nome `db_gym_list`. A definição do conju
 
    * As datas de criação, revisão, início, encerramento e avaliação devem ser armazenadas para permitir o acompanhamento dos registros.
 - **Restrições organizacionais:**
+  - O sistema deve preservar a privacidade das informações dos frequentadores e funcionários; os dados devem ser acessados somente por pessoas autorizadas pela organização.
+  - Informações utilizadas como exemplos na documentação do projeto devem ser fictícias — não devem ser usados dados reais de frequentadores ou funcionários, mesmo que observados durante a pesquisa de campo.
+  - Observações médicas registradas nas avaliações físicas são consideradas dado sensível e exigem controle de acesso mais restrito.
 
 O sistema deve considerar a necessidade de preservar a privacidade das informações dos frequentadores e funcionários. Os dados devem ser acessados somente por pessoas autorizadas pela organização.
 
@@ -160,37 +167,41 @@ Para acessar o Diagrama Entidade-Relacionamento, acesse:
 
 **Frequentador:** representa a pessoa que utiliza os serviços oferecidos pela X Personal Estudio. É a entidade central do modelo, estando relacionada às matrículas, fichas de treino e avaliações físicas.
 
-**Matrícula:** representa o vínculo do frequentador com a academia, registrando informações como data de início, data final e status.
+Para acessar o Dicionário de Dados completo (HTML), acesse:
+[Dicionário de Dados](./dicio_dados/dicionario.html)
 
-**Plano:** representa os planos oferecidos pela academia aos seus frequentadores.
+O dicionário contempla, para cada entidade (Funcionário, Frequentador, Matrícula, Plano, Ficha de Treino e Avaliação Física), seus atributos, descrições e regras de negócio associadas, seguindo o modelo de tabela padronizado (Atributo | Descrição | Regra de negócio).
 
-**Ficha de Treino:** representa o registro utilizado para organizar as informações relacionadas ao treino do frequentador, incluindo seu objetivo e datas de criação e revisão.
+---
 
-**Funcionário:** representa os profissionais envolvidos nas atividades da organização e responsáveis por determinadas ações relacionadas aos frequentadores.
+## 6. Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
 
-**Avaliação Física:** representa os registros obtidos durante o acompanhamento físico do frequentador, incluindo medidas e observações.
+- **Entidades reconhecidas:**
 
-- **Atributos e classificações:**
+  - **Frequentador:** representa a pessoa que utiliza os serviços oferecidos pela X Personal Studio. É a entidade central do modelo, relacionada às matrículas, fichas de treino e avaliações físicas.
+  - **Matrícula:** representa o vínculo do frequentador com a academia, registrando data de início, data final e status.
+  - **Plano:** representa os planos oferecidos pela academia aos seus frequentadores.
+  - **Ficha de Treino:** representa o registro utilizado para organizar as informações do treino do frequentador, incluindo objetivo e datas de criação/revisão.
+  - **Funcionário:** representa os profissionais da organização responsáveis por determinadas ações relacionadas aos frequentadores (ex.: condução de avaliações físicas).
+  - **Avaliação Física:** representa os registros obtidos durante o acompanhamento físico do frequentador, incluindo medidas corporais e observações médicas.
 
-Cada entidade possui atributos responsáveis por representar suas principais informações. Os identificadores `id` e `id_plano` permitem diferenciar os registros, enquanto os demais atributos representam características específicas de cada entidade.
+- **Atributos e classificações:** cada entidade possui um identificador único (`id`) como chave primária, além de atributos que representam suas características específicas (ex.: `nome`, `cpf`, `data_inicio`, `peso`, `objetivo`). Os detalhes completos estão no [Dicionário de Dados](./dicio_dados/dicionario.html).
 
 - **Relacionamentos pertinentes:**
+  - **recebe** conecta Frequentador e Ficha de Treino: um frequentador pode receber nenhuma ou várias fichas de treino ao longo do tempo; toda ficha pertence a exatamente um frequentador.
+  - **possui** conecta Frequentador e Matrícula: um frequentador possui uma ou mais matrículas (histórico de renovações); toda matrícula pertence a exatamente um frequentador.
+  - **compõe** conecta Matrícula e Plano: um plano pode compor nenhuma ou várias matrículas; toda matrícula está associada a exatamente um plano.
+  - **possui** conecta Frequentador e Avaliação Física: um frequentador pode possuir nenhuma ou várias avaliações físicas; toda avaliação física pertence a exatamente um frequentador.
+  - **avalia** conecta Funcionário e Avaliação Física: um funcionário pode realizar nenhuma ou várias avaliações físicas; toda avaliação física é conduzida por exatamente um funcionário.
 
-O relacionamento **recebe** conecta Ficha de Treino e Frequentador, representando que uma ficha de treino pertence a um frequentador.
+- **Restrições e políticas organizacionais aplicadas ao modelo:** o modelo garante que registros como matrículas, avaliações e fichas de treino não existam sem associação a um frequentador (evitando registros órfãos), e considera a necessidade de controle de acesso e proteção dos dados pessoais e médicos armazenados no sistema.
 
-O relacionamento **possui** conecta Frequentador e Matrícula, representando o vínculo do frequentador com sua matrícula.
+---
 
-O relacionamento **compõe** conecta Matrícula e Plano, representando o plano associado à matrícula.
+## 7. Diagrama Entidade-Relacionamento (DER)
 
-O relacionamento **possui** entre Frequentador e Avaliação Física representa os registros de avaliações realizados para cada frequentador.
-
-O relacionamento **avalia** conecta Funcionário e Avaliação Física, representando o funcionário responsável pela realização da avaliação.
-
-- **Restrições e políticas organizacionais aplicadas ao modelo:**
-
-O modelo considera que os registros devem manter seus vínculos entre as entidades, evitando que informações como matrículas, avaliações e fichas de treino sejam armazenadas sem associação a um frequentador.
-
-Também são consideradas as necessidades de controle de acesso e proteção dos dados pessoais armazenados no sistema.
+Para acessar o Diagrama Entidade-Relacionamento, acesse:
+[DER](./diagramas/der_corrigido.png)
 
 ---
 
@@ -201,31 +212,33 @@ Para acessar o Diagrama Entidade-Relacionamento, acesse:
 
 ---
 
-### Justificativa Técnica
+## 8. Justificativa Técnica
 
 A modelagem foi desenvolvida considerando os principais processos e informações identificados na X Personal Estudio.
 
 A entidade **Frequentador** foi definida como uma das principais entidades do modelo por representar as pessoas que utilizam os serviços da academia. A partir dela são estabelecidos relacionamentos com matrícula, ficha de treino e avaliação física.
 
-A entidade **Matrícula** foi separada da entidade Frequentador para representar o vínculo do aluno com a academia e armazenar informações específicas desse processo, como data de início, data final e status.
+A entidade **Matrícula** foi separada da entidade Frequentador para representar o vínculo do aluno com a academia e armazenar informações específicas desse processo (data de início, data final e status), permitindo manter um histórico de renovações sem sobrescrever dados anteriores.
 
-A entidade **Plano** foi criada para representar os diferentes planos oferecidos pela organização. A separação permite que os planos sejam cadastrados e associados às matrículas sem duplicar suas informações.
+A entidade **Plano** foi criada para representar os diferentes planos oferecidos pela organização. Essa separação evita a duplicação de informações do plano em cada matrícula e permite que planos sejam cadastrados, alterados ou descontinuados de forma independente.
 
 A entidade **Ficha de Treino** representa uma informação específica do acompanhamento do frequentador. Seus atributos permitem registrar o objetivo, a data de criação e a data de revisão da ficha.
 
-A entidade **Avaliação Física** foi criada para organizar os dados relacionados ao acompanhamento físico dos frequentadores, permitindo registrar peso, altura, percentual de gordura, observações médicas e data da avaliação.
+A entidade **Avaliação Física** foi criada para organizar os dados relacionados ao acompanhamento físico dos frequentadores, permitindo registrar peso, altura, percentual de gordura, observações médicas e data da avaliação. Optou-se por vincular cada avaliação a **exatamente um** frequentador e a **exatamente um** funcionário responsável (cardinalidade 1:N em ambos os lados, e não N:M), pois uma avaliação física é, por natureza, um evento individual conduzido por um único profissional em um único aluno — essa escolha evita ambiguidades de autoria e de titularidade do registro.
 
 A entidade **Funcionário** representa os profissionais envolvidos na organização e permite relacionar o responsável à realização das avaliações físicas.
 
-A utilização de entidades separadas reduz a repetição de informações e permite que o modelo seja ampliado futuramente. Dessa forma, novas funcionalidades poderão ser incorporadas ao sistema sem a necessidade de alterar completamente sua estrutura conceitual.
+A utilização de entidades separadas (em vez de agrupar tudo em Frequentador) reduz a repetição de informações e permite que o modelo seja ampliado futuramente — por exemplo, com o detalhamento de pagamentos, exercícios associados às fichas de treino, ou controle de frequência/acesso — sem a necessidade de alterar completamente sua estrutura conceitual.
 
-As cardinalidades foram definidas de acordo com os vínculos representados no modelo, buscando garantir que as informações permaneçam relacionadas de maneira coerente entre frequentadores, matrículas, planos, fichas de treino, funcionários e avaliações físicas.
+As cardinalidades foram definidas de acordo com os vínculos reais observados na organização, buscando garantir que as informações permaneçam relacionadas de maneira coerente entre frequentadores, matrículas, planos, fichas de treino, funcionários e avaliações físicas, e evitando relacionamentos muitos-para-muitos que não correspondem à realidade do negócio.
+
+---
 
 ---
 
 ### Uso de Inteligência Artificial
 
-Durante a elaboração do projeto, foi utilizada a ferramenta **ChatGPT** como apoio à organização e revisão da documentação do trabalho.
+Durante a elaboração do projeto, foi utilizada a ferramenta **ChatGPT** como apoio à organização e revisão da documentação do trabalho. Posteriormente, o grupo também utilizou o **Claude (Anthropic)** para revisar a consistência entre o README, o Dicionário de Dados e o Diagrama Entidade-Relacionamento, e para corrigir divergências encontradas entre esses três artefatos.
 
 | Item | O que registrar |
 |------|------------------|
