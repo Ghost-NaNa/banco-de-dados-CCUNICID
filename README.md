@@ -142,7 +142,8 @@ Para acessar o Diagrama Entidade-Relacionamento, acesse:
 
 O diagrama representa as 6 entidades (Frequentador, Matrícula, Plano, Ficha de Treino, Funcionário e Avaliação Física), seus atributos (com identificação das chaves primárias), os 5 relacionamentos descritos na Seção 6 e as respectivas cardinalidades em notação Chen (mín, máx). O modelo evita relacionamentos N:M não justificados, mantendo todas as associações em cardinalidade 1:N com entidades associativas explícitas (Matrícula) onde havia potencial ambiguidade — o que garante consistência e facilita a evolução do modelo em etapas futuras (ex.: inclusão de pagamentos detalhados, exercícios vinculados às fichas de treino, controle de frequência/acesso).
 
----
+Para acessar o Diagrama Entidade-Relacionamento, acesse:
+[DER](diagramas/conceitual_1.1.png)
 
 ## 8. Justificativa Técnica
 

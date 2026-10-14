@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>X Personal Studio | Dicionário de Dados</title>
+    <title>BlueFit | Dicionário de Dados</title>
 
     <style>
 
@@ -81,11 +81,9 @@
         }
 
         .logo-text {
-            font-size: 14px;
+            font-size: 20px;
             font-weight: 800;
-            letter-spacing: -0.2px;
-            line-height: 1.25;
-            white-space: nowrap;
+            letter-spacing: -1px;
         }
 
         .logo-text span {
@@ -510,11 +508,11 @@
     <div class="logo">
 
         <div class="logo-icon">
-            X
+            B
         </div>
 
         <div class="logo-text">
-            X PERSONAL<br><span>STUDIO</span>
+            BLUE<span>FIT</span>
         </div>
 
     </div>
