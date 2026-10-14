@@ -571,7 +571,7 @@
             </h1>
 
             <p>
-                Sistema de Gestão de Academia — BlueFit.
+                Sistema de Gestão de Academia — X Personal Studio.
                 Documentação conceitual das entidades, atributos,
                 relacionamentos e regras de negócio do sistema.
             </p>
@@ -710,7 +710,7 @@
                     <tr>
                         <td>FREQUENTADOR</td>
                         <td>AVALIACAO_FISICA</td>
-                        <td>N:M</td>
+                        <td>1:N</td>
                     </tr>
 
                 </tbody>
@@ -1420,7 +1420,7 @@ QT_PERCENTUAL_GORDURA +
 
     <footer>
 
-        <strong>BLUEFIT</strong>
+        <strong>X PERSONAL STUDIO</strong>
 
         <br>
 
