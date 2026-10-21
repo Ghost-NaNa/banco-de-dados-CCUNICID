@@ -45,7 +45,7 @@ A instituição foi escolhida pela facilidade de comunicação com os envolvidos
 - **Evidências da organização:**
 
   ![comprovação — fachada](./dicio_dados/imgs/fachada.jpeg)
-  ![comprovação — interior 1](./dicio_dados/imgs/dentro1.jpeg)
+  ![comprovação — interior 1](./dicio_dados/imgs/Dentro.jpeg(3).jpeg)
   ![comprovação — interior 2](./dicio_dados/imgs/dentro2.jpeg)
 
 ---
