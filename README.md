@@ -59,35 +59,30 @@ Facilidade de acesso e comunicação com o responsável, e presença de relaçõ
 ### Evidências
 Fotos do ambiente e fotos com o dono localizadas no diretório [imgs](https://github.com/Ghost-NaNa/banco-de-dados-CCUNICID/tree/main/dicio_dados/imgs)
  
-> ⚠️ **Ação:** a foto da fachada é do Google Street View ("© 2024 Google"). Substituir por foto **tirada pelo grupo no local**, de preferência com um integrante aparecendo, e incluir as demais evidências da seção 2.
- 
 ---
  
 ## 2. Contato e Entrevista com a Organização
  
-> ⚠️ Esta seção precisa ser preenchida com fatos reais. Sem ela, o critério de contato fica sem comprovação.
- 
 | Item | Registro |
 |---|---|
-| **Data da visita/entrevista** | ⚠️ [PREENCHER] |
-| **Forma** | ⚠️ [presencial / WhatsApp / telefone] |
-| **Participantes do grupo** | ⚠️ [PREENCHER] |
-| **Entrevistado(a) e cargo** | ⚠️ [PREENCHER] |
-| **Comprovação** | ⚠️ [foto do grupo no local, print da conversa (ocultando dados pessoais), termo/autorização do responsável] |
+| **Data da visita/entrevista** | 19/10/2026 |
+| **Forma** | Presencial |
+| **Participantes do grupo** | Nathan de Oliveira, Guilherme Mirada e Guilherme Silva |
+| **Entrevistado(a) e cargo** | Wolverine, Dono da academia |
+| **Comprovação** | [Ver imagem]() |
  
-### Roteiro de perguntas (usar na entrevista e registrar as respostas)
-1. Como é feita a matrícula de um novo aluno? Quais dados e documentos são pedidos?
-2. Quais planos existem (nome, duração, valor)? Há desconto, trancamento ou cancelamento?
-3. Como e quando o pagamento é cobrado (mensal, trimestral, PIX, cartão, dinheiro)? O que acontece com atraso?
-4. Quem monta a ficha de treino, com que frequência é revisada e como o aluno a recebe?
-5. Quem faz a avaliação física, a cada quanto tempo e quais medidas são registradas?
-6. Como a recepção confere se o aluno está com plano ativo ao entrar?
-7. Quais funcionários podem ver/alterar quais informações?
-8. Quais informações você sente mais falta de consultar hoje?
+### Perguntas realizadas na 1ª visita (19/10/2026)
+1. Há algum problema utilizar o espaço da academia e fazer perguntas aos funcionarios da academia?
+2. Como funciona academia?
+
 ### Respostas registradas
-⚠️ **[PREENCHER: resumo das respostas, 1 parágrafo por pergunta]**
- 
----
+1. Resposta:
+   - "Wolverine" (Nos deu esse apelido para registrar, pois não quer ser identificado), disse que não havia problema nenhum em ajudar e estava disposto a facilitar as coisas.
+2. Resposta:
+   - Wolverine nos disse que ela é totalmente focada em musculação, com 3 instrutores especialistas.
+
+### Pendente para a 2ª interação
+As perguntas sobre matrícula, planos, pagamento, ficha, avaliação e permissões ainda serão feitas.
  
 ## 3. Processos de Negócio
  
