@@ -42,7 +42,7 @@ Este projeto realiza a modelagem conceitual de um sistema de gerenciamento de in
 | **Natureza** | Academia de musculação, com fins lucrativos |
 | **Localização** | R. Refinaria Mataripe, 577 - Vila Antonieta, São Paulo - SP, 03477-010 |
 | **Contato** |(11) 97730-5571|
-| **Porte** | Pequeno: ~5 funcionários (instrutores, recepcionistas, limpeza) e ~200 frequentadores inscritos |
+| **Porte** | Pequeno: ~3 funcionários e ~200 frequentadores inscritos |
 | **Público** | Principalmente moradores do bairro |
 | **Responsável contatado** | "Wolverine" - Dono do local |
  
@@ -65,13 +65,13 @@ Fotos do ambiente e fotos com o dono localizadas no diretório [imgs](https://gi
  
 | Item | Registro |
 |---|---|
-| **Data da visita/entrevista** | 19/10/2026 |
+| **Data da visita/entrevista** | 11/09/2026 |
 | **Forma** | Presencial |
 | **Participantes do grupo** | Nathan de Oliveira, Guilherme Mirada e Guilherme Silva |
 | **Entrevistado(a) e cargo** | Wolverine, Dono da academia |
-| **Comprovação** | [Ver imagem]() |
+| **Comprovação** | [Ver imagem](./dicio_dados/imgs/FotoDono.jpeg.jpeg) |
  
-### Perguntas realizadas na 1ª visita (19/10/2026)
+### Perguntas realizadas na 1ª visita (11/09/2026)
 1. Há algum problema utilizar o espaço da academia e fazer perguntas aos funcionarios da academia?
 2. Como funciona academia?
 
@@ -80,13 +80,30 @@ Fotos do ambiente e fotos com o dono localizadas no diretório [imgs](https://gi
    - "Wolverine" (Nos deu esse apelido para registrar, pois não quer ser identificado), disse que não havia problema nenhum em ajudar e estava disposto a facilitar as coisas.
 2. Resposta:
    - Wolverine nos disse que ela é totalmente focada em musculação, com 3 instrutores especialistas.
-
-### Pendente para a 2ª interação
-As perguntas sobre matrícula, planos, pagamento, ficha, avaliação e permissões ainda serão feitas.
  
+### Perguntas realizadas na 2ª visita
+1. Como é feita a matricula?
+2. Tem plano proprio e como são?
+3. Como montam a ficha de treino?
+4. O que cada funcionario tem permissão de fazer?
+
+### Respostas registradas
+1. Resposta: 
+   - É realizada utilizando o CPF como base, e dados básicos - como nome completo, data de nascimento e foto do interessado.
+
+2. Resposta:
+   - Possuem um plano de inscrição proprio com 2 meios de pagamento, um sendo mensal e o outro anual.
+
+3. Resposta:
+   - Separa os exercicios de acordo com a necessidade do interresado, por exemplo, se ele quer ganher massa ou emagrecer teria uma ficha pronta para isso.
+
+4. Resposta:
+   - Todos os funcionários estão no mesmo plano de funções e resposabilidades, mesmo estando em andares diferentes da hierárquia. os funcionários, incluindo o dono, são, aparentemente, personais também
+
+
 ## 3. Processos de Negócio
  
-> Descrevem **como a academia opera hoje** (AS-IS). ⚠️ O texto abaixo é um **rascunho** e deve ser corrigido com base na entrevista; trechos com `[CONFIRMAR]` não foram verificados.
+> Descrevem **como a academia opera hoje** (AS-IS).
  
 ### 3.1 Matrícula e pagamento
 1. O interessado procura a recepção e escolhe um plano. `[CONFIRMAR]`
@@ -233,30 +250,15 @@ CREATE DATABASE db_gym_list
 | Frequentador **realiza** Avaliação | Frequentador (0,N) | Avaliação (1,1) |
 | Funcionário **conduz** Avaliação | Funcionário (0,N) | Avaliação (1,1) |
  
-### DER (versão textual para conferência com o PNG)
- 
-```mermaid
-erDiagram
-    FREQUENTADOR ||--o{ MATRICULA : possui
-    PLANO ||--o{ MATRICULA : compoe
-    MATRICULA ||--o{ PAGAMENTO : gera
-    FREQUENTADOR ||--o{ FICHA_TREINO : recebe
-    FUNCIONARIO ||--o{ FICHA_TREINO : elabora
-    FICHA_TREINO ||--|{ FICHA_EXERCICIO : contem
-    EXERCICIO ||--o{ FICHA_EXERCICIO : compoe
-    FREQUENTADOR ||--o{ AVALIACAO_FISICA : realiza
-    FUNCIONARIO ||--o{ AVALIACAO_FISICA : conduz
-```
- 
-> ⚠️ **Ação:** refazer o PNG em notação Chen com (mín,máx), **incluindo MATRÍCULA, PLANO, PAGAMENTO, EXERCÍCIO e FICHA_EXERCÍCIO**, e manter **apenas um** DER no repositório (remover `der_corrigido.png` ou `conceitual_1.1.png`, o que estiver desatualizado).
->
-> [DER](./diagramas/der_final.png)
+### DER (Conceitual)
+
+> [DER](./diagramas/conceitual_1.1.png)
  
 ---
  
 ## 8. Dicionário de Dados
  
-O dicionário completo está em Markdown: **[dicio_dados/dicionario.md](./dicio_dados/dicionario.md)**. Ele cobre SGBD/collation, versão, notação, expressões formais com leitura, tipos físicos, índices, log e papéis por operação (LGPD) para as 9 entidades do DER.
+O dicionário completo está em uma página HTML: **[dicio_dados/dicionario.hmtl](./dicio_dados/dicionario.md)**. Ele cobre SGBD/collation, versão, notação, expressões formais com leitura, tipos físicos, índices, log e papéis por operação (LGPD) para as 9 entidades do DER.
  
 ---
  
@@ -284,9 +286,9 @@ Não modelamos, nesta etapa, controle de acesso por catraca, aulas coletivas nem
 |---|---|
 | **Ferramenta e etapa** | **ChatGPT** — estruturação inicial do README (requisitos, regras, justificativa). **Claude (Anthropic)** — revisão de consistência entre README, Dicionário de Dados e DER, e redação da versão 0.2.0 após a avaliação do professor. |
 | **Motivação** | Organizar a documentação conforme o modelo de entrega e corrigir divergências entre os artefatos. |
-| **Prompts utilizados** | "Chat me ajuda a montar o README do GitHub"; "monta o texto completo por favor com as suas sugestões"; "atue como meu parceiro de trabalho e me ajude a corrigir os seguintes critérios no nosso projeto" (com a lista de critérios e o README). |
-| **Resposta recebida** | ChatGPT: estrutura geral da documentação. Claude: README e dicionário reestruturados, incluindo Pagamento, Exercício, regras de negócio, tipos físicos, índices, log e papéis. |
-| **Fontes consultadas e verificadas** | Dados da organização vieram do levantamento do grupo ⚠️ **[PREENCHER: como cada informação foi confirmada, ex.: "valores dos planos conferidos com o responsável em DD/MM"]**. Sintaxe SQL conferida na documentação do MySQL 8.0. |
+| **Prompts utilizados** | "Revise esse arquivo (se referindo a o README) e veja se está consisntente"; "corrija erros de digitação, uso indevido de palavras e altere conteúdo se necessário"; |
+| **Resposta recebida** | ChatGPT: revisou a consistência do arquivo e ainda melhorou a coerência dos textos. Claude: Encontrou poucos erros, e os poucos que encontrou, corrigiu sem mais|
+| **Fontes consultadas e verificadas** | Comparando com o as informaçẽos já coletadas para evitar possiveis alucinações da IA |
 | **Trechos rejeitados ou corrigidos** | ⚠️ **[PREENCHER com casos reais, ex.: "A IA sugeriu campo `exercicios` em texto livre na ficha; rejeitamos e criamos Exercício e Ficha_Exercício"; "A IA propôs tolerância de 5 dias de atraso; substituímos pelo prazo informado pela academia"]** |
 | **Justificativa da escolha final** | Adotamos as sugestões compatíveis com os processos observados e o DER; o que não foi confirmado com a organização ficou marcado como a validar. |
 | **Reflexão crítica** | A IA tende a generalizar processos de academias; por isso as regras e os fluxos foram confrontados com a entrevista. As decisões finais são do grupo. |
