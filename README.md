@@ -77,7 +77,7 @@ Fotos do ambiente e fotos com o dono localizadas no diretório [imgs](https://gi
 
 ### Respostas registradas
 1. Resposta:
-   - "Wolverine" (Nos deu esse apelido para registrar, pois não quer ser identificado), disse que não havia problema nenhum em ajudar e estava disposto a facilitar as coisas.
+   - "Wolverine" (Nós utilizamos esse apelido para registrar, pois ele não quer ser identificado), disse que não havia problema nenhum em ajudar e estava disposto a facilitar as coisas.
 2. Resposta:
    - Wolverine nos disse que ela é totalmente focada em musculação, com 3 instrutores especialistas.
  
@@ -98,7 +98,7 @@ Fotos do ambiente e fotos com o dono localizadas no diretório [imgs](https://gi
    - Separa os exercicios de acordo com a necessidade do interresado, por exemplo, se ele quer ganher massa ou emagrecer teria uma ficha pronta para isso.
 
 4. Resposta:
-   - Todos os funcionários estão no mesmo plano de funções e resposabilidades, mesmo estando em andares diferentes da hierárquia. os funcionários, incluindo o dono, são, aparentemente, personais também
+   - Todos os funcionários estão no mesmo plano de funções e resposabilidades, mesmo estando em andares diferentes da hierárquia. os funcionários, incluindo o dono, são personais também
 
 
 ## 3. Processos de Negócio
