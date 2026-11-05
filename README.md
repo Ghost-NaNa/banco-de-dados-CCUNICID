@@ -282,6 +282,7 @@ Não modelamos, nesta etapa, controle de acesso por catraca, aulas coletivas nem
  
 ## 10. Uso de Inteligência Artificial
  
+**README**
 | Item | Registro |
 |---|---|
 | **Ferramenta e etapa** | **ChatGPT** — estruturação inicial do README (requisitos, regras, justificativa). **Claude (Anthropic)** — revisão de consistência entre README, Dicionário de Dados e DER, e redação da versão 0.2.0 após a avaliação do professor. |
@@ -292,3 +293,31 @@ Não modelamos, nesta etapa, controle de acesso por catraca, aulas coletivas nem
 | **Trechos rejeitados ou corrigidos** | ⚠️ **[PREENCHER com casos reais, ex.: "A IA sugeriu campo `exercicios` em texto livre na ficha; rejeitamos e criamos Exercício e Ficha_Exercício"; "A IA propôs tolerância de 5 dias de atraso; substituímos pelo prazo informado pela academia"]** |
 | **Justificativa da escolha final** | Adotamos as sugestões compatíveis com os processos observados e o DER; o que não foi confirmado com a organização ficou marcado como a validar. |
 | **Reflexão crítica** | A IA tende a generalizar processos de academias; por isso as regras e os fluxos foram confrontados com a entrevista. As decisões finais são do grupo. |
+
+**Massa de Dados**
+| Item | Registro |
+|---|---|
+| **Ferramenta e etapa** | **ChatGPT Plus** — estruturação de uma massa de dados fictícia baseada nos dados obtidos durante a primeira e a segunda entrevista, com a mesma contendo todos os dados necessários para completar nossa base de dados e tornar o script em SQl 100% funcional. |
+| **Motivação** | Otimizar o tempo para poder focar no refinamento de certas partes do projeto. |
+| **Prompts utilizados** | Com base no banco de dados da X Personal Studio e nas informações do repositório https://github.com/Ghost-NaNa/banco-de-dados-CCUNICID, crie uma massa de dados fictícia utilizando MySQL 8.0. O banco deve conter exatamente 3 funcionários e 210 frequentadores, além de registros de planos, matrículas, pagamentos, exercícios, fichas de treino e avaliações físicas. Utilize apenas dados fictícios e respeite as regras de negócio, os relacionamentos e as restrições já definidos no projeto. Inclua diferentes situações de matrículas e pagamentos para permitir testes. Não altere a estrutura das tabelas e organize o código SQL para que possa ser executado sem erros. Ao final, adicione consultas para verificar se os dados foram inseridos corretamente. |
+| **Resposta recebida** | ChatGPT: Criei uma massa de dados fictícia para a X Personal Studio, compatível com o código SQL que desenvolvemos anteriormente, contemplando os 3 funcionários e 210 frequentadores. |
+| **Fontes consultadas e verificadas** | Para termos 100% de certeza do que estava sendo feito naquela parte usamos como base de analíse vídeos do youtube que ensinavam a mexer com MySQL 8.0 e os arquivos disponibilizados pelo professor no drive. |
+| **Trechos rejeitados ou corrigidos** | Alteramos por completo a estrutura dos IDs para se adequar mais ao nosso planejamento inicial e torna-lo mais simples, além de fazermos alterações simples em relação as especialidades de cada instrutor e na parte dos dados dos frequentadores. |
+| **Justificativa da escolha final** | Para a massa de dados foi a escolha mais eficaz, já que após uma revisão a mesma já estava pronta para uso e pela velocidade de criação tivemos mais tempo para focar em outros aspectos do nosso projeto. |
+| **Reflexão crítica** | Para criação de dados fictícios em larga escala as IAs são uma ótima escolha para quem quer otimizar seu tempo. |
+
+**Análise e correções do Script em SQL**
+| Item | Registro |
+|---|---|
+| **Ferramenta e etapa** | **ChatGPT Plus** — verificar a qualidade do script e se existia a necessidade de fazer alterações |
+| **Motivação** | Por ser minha primeira vez utilizando SQL optei por ter um apoio para verificar a qualidade do meu código |
+| **Prompts utilizados** | Com base no script SQL desenvolvido para a X Personal Studio e nas informações do repositório https://github.com/Ghost-NaNa/banco-de-dados-CCUNICID, faça uma análise da qualidade do código utilizando os requisitos do projeto como referência. Verifique se as tabelas, os relacionamentos, as chaves primárias e estrangeiras e as restrições estão corretos. Analise também a organização do código, a integridade dos dados e a compatibilidade com MySQL 8.0. Identifique possíveis erros, inconsistências ou melhorias, verificando se o código atende às regras de negócio estabelecidas. |
+| **Resposta recebida** | ChatGPT: Relatório de Verificação de Qualidade do Código SQL
+Projeto: Banco de Dados — X Personal Studio
+SGBD: MySQL 8.0
+Resultado da análise: Código bem estruturado, com alguns pontos que precisam de ajustes. |
+| **Fontes consultadas e verificadas** | Para confirmar que a IA não estava alucinando nas respostas, voltei aos conteúdos que utilizei na criação do script e verifiquei cada uma das respostas de melhoria no código. |
+| **Trechos rejeitados ou corrigidos** | Tive algumas reselvas apenas na forma como ela queria organizar a estrutura do código, mas encontrei um meio termo que batia com os conteúdos que estava utilizando. |
+| **Justificativa da escolha final** | Levei muito em consideração a forma como foi feita a primeira entrega então optei por levar mais tempo nessa sessão para garantir uma qualidade alta. |
+| **Reflexão crítica** | Acredito que para uma revisão e análise de código as IAs sempre são bem vindas, para otimização de tempo. |
+
