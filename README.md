@@ -135,16 +135,23 @@ Descrevem como a academia opera atualmente (AS-IS), com base nas informações o
 
 ```mermaid
 flowchart TD
-A[Interessado procura a academia] --> B[Conhece os planos disponíveis]
-B --> C[Escolhe o plano mensal ou anual]
-C --> D[Cadastro no sistema de terceiros]
-D --> E[Inscrição do frequentador]
-E --> F[Frequentador informa seus objetivos]
-F --> G[Instrutor seleciona os exercícios]
-G --> H[Elaboração da ficha de treino em papel]
-H --> I[Entrega da ficha ao frequentador]
-I --> J[Realização dos exercícios]
-
+A[Interessado procura a recepção] --> B[Escolhe um plano]
+B --> C[Verificação ou realização do cadastro]
+C --> D[Primeiro pagamento]
+D --> E[Matrícula ativa]
+E --> F[Avaliação física]
+F --> G[Instrutor elabora ficha de treino]
+G --> H[Aluno realiza os treinos]
+H --> I{Chegou o período de revisão?}
+I -- Sim --> J[Nova avaliação e revisão da ficha]
+J --> G
+I -- Não --> H
+E --> K{Matrícula venceu?}
+K -- Sim --> L{Aluno deseja renovar?}
+L -- Sim --> D
+L -- Não --> M[Matrícula encerrada]
+K -- Não --> H
+ 
 ### 3.5 Problemas do processo atual e integração proposta
 
 | Etapa | Problema atual | Benefício esperado com o banco de dados |
