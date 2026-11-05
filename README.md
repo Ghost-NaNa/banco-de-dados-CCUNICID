@@ -30,7 +30,7 @@
  
 ## Introdução
  
-Este projeto realiza a modelagem conceitual de um sistema de gerenciamento de informações para a **X Personal Studio**, academia de musculação localizada em São Paulo - SP. O escopo cobre o levantamento de requisitos, as regras de negócio, o Dicionário de Dados e o Modelo Entidade-Relacionamento (DER). A implementação física do banco e o desenvolvimento do sistema **não** fazem parte desta etapa.
+Este projeto realiza a modelagem conceitual de um sistema de gerenciamento de informações para a **X Personal Studio**, academia de musculação localizada em São Paulo - SP. O escopo cobre o levantamento de requisitos, as regras de negócio, o Dicionário de Dados e o Modelo Entidade-Relacionamento (DER). Até o presente momento, implementação física do banco e o desenvolvimento do sistema **não** fazem parte desta etapa
  
 ---
  
@@ -47,14 +47,18 @@ Este projeto realiza a modelagem conceitual de um sistema de gerenciamento de in
 | **Responsável contatado** | "Wolverine" - Dono do local |
  
 ### Problema identificado
-Hoje o cadastro de frequentadores e as fichas de treino são mantidos em **papel**. Isso gera, na prática (⚠️ **[CONFIRMAR e exemplificar com casos relatados pelo responsável]**):
- 
-- dificuldade de localizar a ficha de um aluno e saber qual é a versão vigente;
-- ausência de histórico de avaliações físicas comparável ao longo do tempo;
-- controle de vencimento de plano e de pagamento sem consulta centralizada (ex.: saber quem está inadimplente ou com matrícula vencendo);
-- risco de perda/extravio de dados pessoais e de saúde.
+Hoje o cadastro de frequentadores é feito por um sistema terceiro e as fichas de treino são guardadas em papel, e isso, por mais intuitivo que seja, gera alguns problemas.
+
+   - De acordo com o próprio dono, "fico perdido quando as fichas acumulam demais". Ou seja, quando tem um certo volume de fichas feitas, é muito papel para organizar e acaba complicando.
+   - Se as fichas são em papel, logicamente precisam de espaço fisico, e por ser um local pequeno, não é uma tarefa fácil
+
 ### Justificativa da escolha
-Facilidade de acesso e comunicação com o responsável, e presença de relações claras entre planos, matrículas, pagamentos, treinos e avaliações, o que torna a organização um bom caso de modelagem. ⚠️ **[ACRESCENTAR 1–2 frases com a motivação específica do grupo]**
+É um local de fácil acesso e comunicação com o responsável, e presença de relações claras entre planos, matrículas, pagamentos, treinos e avaliações, o que torna a organização um bom caso de modelagem.
+
+Possuí um fluxo relativamente constante de informações sobre os alunos e intrutores, tornando necessário um banco de dados que facilite o armazenamento (e que seja unificado), a consulta e a atualização desses registros.
+
+Vale ressaltar que escolha permite trabalhar com diferentes entidades e relacionamentos, como alunos, instrutores, exercícios e fichas de treino, proporcionando uma boa oportunidade de aplicar na prática os conceitos de modelagem de banco de dados.
+
  
 ### Evidências
 Fotos do ambiente e fotos com o dono localizadas no diretório [imgs](https://github.com/Ghost-NaNa/banco-de-dados-CCUNICID/tree/main/dicio_dados/imgs)
@@ -95,7 +99,7 @@ Fotos do ambiente e fotos com o dono localizadas no diretório [imgs](https://gi
    - Possuem um plano de inscrição proprio com 2 meios de pagamento, um sendo mensal e o outro anual.
 
 3. Resposta:
-   - Separa os exercicios de acordo com a necessidade do interresado, por exemplo, se ele quer ganher massa ou emagrecer teria uma ficha pronta para isso.
+   - Separa os exercicios de acordo com a necessidade do interresado, por exemplo, se ele quer ganhar massa ou emagrecer seria feito uma ficha pronta, em papel, para isso.
 
 4. Resposta:
    - Todos os funcionários estão no mesmo plano de funções e resposabilidades, mesmo estando em andares diferentes da hierárquia. os funcionários, incluindo o dono, são, aparentemente, personais também
@@ -267,16 +271,16 @@ O dicionário completo está em uma página HTML: **[dicio_dados/dicionario.hmtl
 | Decisão | Alternativa considerada | Por que esta escolha |
 |---|---|---|
 | **Matrícula separada de Frequentador** | Guardar início/fim/status no próprio frequentador | Permite histórico de renovações sem sobrescrever dados |
-| **Plano como entidade** | Escrever o nome do plano em cada matrícula | Evita repetição e permite alterar ou descontinuar planos |
+| **Plano como entidade** | Escrever o nome do plano/tipo em cada matrícula | Evita repetição e permite alterar ou descontinuar planos |
 | **Pagamento como entidade (1:N com Matrícula)** | Atributo "situação de pagamento" no frequentador | Uma matrícula tem várias parcelas; só assim há histórico e consulta de inadimplência (RF04/RF05) |
 | **Valor copiado para o Pagamento** | Calcular sempre pelo valor atual do plano | Reajuste de plano não altera cobranças passadas (RN10) |
-| **Avaliação com 1 frequentador e 1 funcionário (1:N, não N:M)** | Avaliação feita por vários profissionais | Avaliação é evento individual; evita ambiguidade de autoria. ⚠️ [CONFIRMAR na entrevista] |
+| **Avaliação com 1 frequentador e 1 intrutor (1:N, não N:M)** | Avaliação podendo ser feita por vários profissionais | Avaliação é evento individual; evita ambiguidade de autoria. |
 | **Ficha ↔ Exercício N:M com associativa** | Campo de texto livre na ficha | Exercícios reutilizáveis e consultáveis; séries/repetições ficam na associativa |
 | **Funcionário elabora Ficha** | Ficha sem autor | RF09 exige responsável; rastreabilidade |
 | **Inativar em vez de excluir** | Exclusão física | Preserva histórico e evita registros órfãos (RN18) |
 | **Hash de senha** | Senha em texto | Segurança e LGPD (RNF01) |
  
-Não modelamos, nesta etapa, controle de acesso por catraca, aulas coletivas nem estoque, por não terem sido citados como necessidade pela organização. ⚠️ [CONFIRMAR]
+Não modelamos, nesta etapa, controle de acesso por catraca e nem estoque, por não terem sido citados como necessidade pela organização.
  
 ---
  
@@ -290,7 +294,7 @@ Não modelamos, nesta etapa, controle de acesso por catraca, aulas coletivas nem
 | **Prompts utilizados** | "Revise esse arquivo (se referindo a o README) e veja se está consisntente"; "corrija erros de digitação, uso indevido de palavras e altere conteúdo se necessário"; |
 | **Resposta recebida** | ChatGPT: revisou a consistência do arquivo e ainda melhorou a coerência dos textos. Claude: Encontrou poucos erros, e os poucos que encontrou, corrigiu sem mais|
 | **Fontes consultadas e verificadas** | Comparando com o as informaçẽos já coletadas para evitar possiveis alucinações da IA |
-| **Trechos rejeitados ou corrigidos** | ⚠️ **[PREENCHER com casos reais, ex.: "A IA sugeriu campo `exercicios` em texto livre na ficha; rejeitamos e criamos Exercício e Ficha_Exercício"; "A IA propôs tolerância de 5 dias de atraso; substituímos pelo prazo informado pela academia"]** |
+| **Trechos rejeitados ou corrigidos** | Tanto o chatGPT quanto o Claude, eventualmente acabaram alucinando nas informações, como aconteceu, de alterar de forma exagerada na quantidade de intrutores. |
 | **Justificativa da escolha final** | Adotamos as sugestões compatíveis com os processos observados e o DER; o que não foi confirmado com a organização ficou marcado como a validar. |
 | **Reflexão crítica** | A IA tende a generalizar processos de academias; por isso as regras e os fluxos foram confrontados com a entrevista. As decisões finais são do grupo. |
 
