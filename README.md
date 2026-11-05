@@ -106,48 +106,54 @@ Fotos do ambiente e fotos com o dono localizadas no diretório [imgs](https://gi
 
 
 ## 3. Processos de Negócio
- 
-> Descrevem **como a academia opera hoje** (AS-IS).
- 
+
+Descrevem como a academia opera atualmente (AS-IS), com base nas informações obtidas durante as entrevistas com o responsável pela organização.
+
 ### 3.1 Matrícula e pagamento
-1. O interessado procura a recepção e escolhe um plano. `[CONFIRMAR]`
-2. A recepção preenche a **ficha de papel** com nome, CPF e contato. `[CONFIRMAR]`
-3. O primeiro pagamento é realizado e a data de início é anotada. `[CONFIRMAR]`
-4. Nos meses seguintes, o pagamento é cobrado/conferido manualmente. `[CONFIRMAR]`
-5. Ao fim do período, o aluno renova (nova matrícula) ou deixa a matrícula vencer. `[CONFIRMAR]`
+
+1. O interessado procura a academia para conhecer os planos disponíveis.
+2. A academia oferece planos de inscrição mensal e anual.
+3. O cadastro do frequentador é realizado por meio de um sistema de terceiros, utilizando o CPF como identificação e registrando informações como nome completo, data de nascimento e foto.
+4. O frequentador escolhe o plano desejado e realiza sua inscrição.
+5. Os detalhes sobre as formas de pagamento, cobrança e renovação precisam ser confirmados com o responsável pela academia.
+
 ### 3.2 Avaliação física
-1. O aluno novo (e periodicamente) passa por avaliação com um instrutor. `[CONFIRMAR periodicidade]`
-2. São medidos peso, altura e percentual de gordura, e anotadas observações médicas. `[CONFIRMAR]`
-3. O registro vai para a ficha de papel do aluno; não há comparativo automático entre avaliações.
+
+1. O processo de avaliação física não foi detalhado durante as entrevistas realizadas.
+2. A existência de avaliações periódicas, os procedimentos utilizados e as informações registradas precisam ser confirmados com o responsável pela academia.
+3. A modelagem prevê o registro de avaliações físicas para possibilitar o acompanhamento do histórico e da evolução dos frequentadores.
+
 ### 3.3 Ficha de treino
-1. Com base na avaliação e no objetivo do aluno, um instrutor elabora a ficha. `[CONFIRMAR]`
-2. A ficha lista os exercícios com séries e repetições e é entregue ao aluno. `[CONFIRMAR]`
-3. Após um período, a ficha é revisada e uma nova é criada. `[CONFIRMAR intervalo]`
+
+1. O frequentador informa seus objetivos, como ganhar massa muscular ou emagrecer.
+2. Um instrutor seleciona os exercícios de acordo com as necessidades e os objetivos apresentados pelo frequentador.
+3. A ficha de treino é elaborada em papel e entregue ao frequentador.
+4. As fichas são armazenadas fisicamente, o que pode dificultar sua organização e consulta quando há um grande volume de documentos.
+5. A periodicidade de revisão e atualização das fichas precisa ser confirmada com o responsável pela academia.
+
 ### 3.4 Fluxo geral
- 
+
 ```mermaid
 flowchart TD
-    A[Interessado na recepção] --> B[Escolhe plano]
-    B --> C[Cadastro em ficha de papel]
-    C --> D[Pagamento]
-    D --> E[Matrícula ativa]
-    E --> F[Avaliação física pelo instrutor]
-    F --> G[Instrutor elabora ficha de treino]
-    G --> H[Aluno treina]
-    H --> I{Fim do período?}
-    I -- Renova --> D
-    I -- Revisão --> G
-    I -- Não renova --> J[Matrícula encerrada]
-```
- 
+A[Interessado procura a academia] --> B[Conhece os planos disponíveis]
+B --> C[Escolhe o plano mensal ou anual]
+C --> D[Cadastro no sistema de terceiros]
+D --> E[Inscrição do frequentador]
+E --> F[Frequentador informa seus objetivos]
+F --> G[Instrutor seleciona os exercícios]
+G --> H[Elaboração da ficha de treino em papel]
+H --> I[Entrega da ficha ao frequentador]
+I --> J[Realização dos exercícios]
+
 ### 3.5 Problemas do processo atual e integração proposta
-| Etapa | Problema hoje | O que o sistema resolve |
+
+| Etapa | Problema atual | Benefício esperado com o banco de dados |
 |---|---|---|
-| Cadastro | Dados só em papel | Cadastro único e consultável |
-| Pagamento | Conferência manual | Registro de pagamentos por matrícula, com status |
-| Avaliação | Sem histórico comparável | Histórico por frequentador |
-| Ficha | Versão vigente incerta | Fichas com data de criação/revisão e exercícios |
- 
+| Cadastro | Dados dos frequentadores armazenados em sistema de terceiros, sem integração com as demais informações da academia. | Centralização dos dados dos frequentadores em um banco de dados próprio. |
+| Pagamento | Necessidade de organizar e consultar as informações financeiras vinculadas às matrículas. | Registro dos pagamentos por matrícula, com valores, vencimentos e status. |
+| Avaliação física | Necessidade de manter um histórico organizado das avaliações dos frequentadores. | Armazenamento e consulta do histórico de avaliações físicas. |
+| Ficha de treino | Fichas armazenadas em papel, dificultando a organização e a consulta. | Armazenamento digital das fichas, exercícios e informações de revisão. |
+| Matrícula | Necessidade de organizar os dados dos planos e das inscrições dos frequentadores. | Controle das matrículas, planos, datas e situações de cada frequentador. |
 ---
  
 ## 4. SGBD e Collation
