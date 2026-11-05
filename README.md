@@ -214,9 +214,7 @@ CREATE DATABASE db_gym_list
 ---
  
 ## 6. Regras de Negócio
- 
-> ⚠️ Propostas a partir do modelo; **validar cada uma com o responsável** e ajustar valores reais (prazos, tolerâncias).
- 
+  
 | ID | Regra | Entidades |
 |---|---|---|
 | RN01 | Cada frequentador e cada funcionário é identificado por CPF único. | Frequentador, Funcionário |
@@ -224,10 +222,10 @@ CREATE DATABASE db_gym_list
 | RN03 | Um frequentador pode ter várias matrículas ao longo do tempo (renovações), mas **no máximo uma com status "ativa"** por vez. | Matrícula |
 | RN04 | A data final da matrícula é igual ou posterior à data de início. | Matrícula |
 | RN05 | O status da matrícula assume apenas: ativa, vencida, trancada, cancelada. | Matrícula |
-| RN06 | Uma matrícula é considerada "vencida" quando a data final passa sem renovação. ⚠️ [CONFIRMAR tolerância em dias] | Matrícula |
+| RN06 | Uma matrícula é considerada "vencida" quando a data final passa sem renovação. | Matrícula |
 | RN07 | Cada pagamento pertence a exatamente uma matrícula e tem valor maior que zero. | Pagamento |
 | RN08 | O status do pagamento é: pendente, pago ou atrasado; "pago" exige data de pagamento. | Pagamento |
-| RN09 | Um pagamento "pendente" cujo vencimento passou é tratado como "atrasado". ⚠️ [CONFIRMAR consequência: bloqueio de acesso?] | Pagamento |
+| RN09 | Um pagamento "pendente" cujo vencimento passou é tratado como "atrasado". Consequência: bloqueio de acesso?] | Pagamento |
 | RN10 | O valor do pagamento é registrado no momento da cobrança, mesmo que o preço do plano mude depois. | Pagamento, Plano |
 | RN11 | Planos podem ser descontinuados (inativos), mas não excluídos se houver matrículas associadas. | Plano |
 | RN12 | Toda ficha de treino pertence a um frequentador e é elaborada por um funcionário com cargo de instrutor. | Ficha, Funcionário |
