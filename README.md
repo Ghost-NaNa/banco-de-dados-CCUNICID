@@ -110,35 +110,49 @@ Fotos do ambiente e fotos com o dono localizadas no diretório [imgs](https://gi
 > Descrevem **como a academia opera hoje** (AS-IS).
  
 ### 3.1 Matrícula e pagamento
-1. O interessado procura a recepção e escolhe um plano. `[CONFIRMAR]`
-2. A recepção preenche a **ficha de papel** com nome, CPF e contato. `[CONFIRMAR]`
-3. O primeiro pagamento é realizado e a data de início é anotada. `[CONFIRMAR]`
-4. Nos meses seguintes, o pagamento é cobrado/conferido manualmente. `[CONFIRMAR]`
-5. Ao fim do período, o aluno renova (nova matrícula) ou deixa a matrícula vencer. `[CONFIRMAR]`
+
+1. O interessado procura a recepção e escolhe um plano.
+2. A recepção verifica se o interessado já possui cadastro, evitando duplicidade.
+3. Caso seja novo aluno, a recepção preenche a ficha com nome, CPF e informações de contato.
+4. O primeiro pagamento é realizado e a data de início e vencimento da matrícula são registradas.
+5. Nos meses seguintes, os pagamentos são cobrados e conferidos manualmente.
+6. Ao fim do período contratado, o aluno renova a matrícula ou deixa o plano vencer.
+
 ### 3.2 Avaliação física
-1. O aluno novo (e periodicamente) passa por avaliação com um instrutor. `[CONFIRMAR periodicidade]`
-2. São medidos peso, altura e percentual de gordura, e anotadas observações médicas. `[CONFIRMAR]`
-3. O registro vai para a ficha de papel do aluno; não há comparativo automático entre avaliações.
+
+1. O aluno novo passa por uma avaliação física com um instrutor.
+2. Antes da avaliação, são identificados os objetivos do aluno e possíveis limitações físicas.
+3. São medidos peso, altura e percentual de gordura, além do registro de observações relevantes.
+4. Os resultados são registrados na ficha de papel do aluno.
+5. As avaliações periódicas permitem acompanhar a evolução física do aluno, sem comparativo automático entre os registros.
+
 ### 3.3 Ficha de treino
-1. Com base na avaliação e no objetivo do aluno, um instrutor elabora a ficha. `[CONFIRMAR]`
-2. A ficha lista os exercícios com séries e repetições e é entregue ao aluno. `[CONFIRMAR]`
-3. Após um período, a ficha é revisada e uma nova é criada. `[CONFIRMAR intervalo]`
+
+1. Com base na avaliação física e nos objetivos do aluno, o instrutor elabora a ficha de treino.
+2. A ficha contém a identificação do aluno, a data de elaboração e os exercícios com séries e repetições.
+3. A ficha é entregue ao aluno para realização dos exercícios.
+4. Após determinado período, o instrutor revisa a ficha e elabora uma nova, conforme a evolução e as necessidades do aluno.
+
 ### 3.4 Fluxo geral
- 
+
 ```mermaid
 flowchart TD
-    A[Interessado na recepção] --> B[Escolhe plano]
-    B --> C[Cadastro em ficha de papel]
-    C --> D[Pagamento]
-    D --> E[Matrícula ativa]
-    E --> F[Avaliação física pelo instrutor]
-    F --> G[Instrutor elabora ficha de treino]
-    G --> H[Aluno treina]
-    H --> I{Fim do período?}
-    I -- Renova --> D
-    I -- Revisão --> G
-    I -- Não renova --> J[Matrícula encerrada]
-```
+A[Interessado procura a recepção] --> B[Escolhe um plano]
+B --> C[Verificação ou realização do cadastro]
+C --> D[Primeiro pagamento]
+D --> E[Matrícula ativa]
+E --> F[Avaliação física]
+F --> G[Instrutor elabora ficha de treino]
+G --> H[Aluno realiza os treinos]
+H --> I{Chegou o período de revisão?}
+I -- Sim --> J[Nova avaliação e revisão da ficha]
+J --> G
+I -- Não --> H
+E --> K{Matrícula venceu?}
+K -- Sim --> L{Aluno deseja renovar?}
+L -- Sim --> D
+L -- Não --> M[Matrícula encerrada]
+K -- Não --> H
  
 ### 3.5 Problemas do processo atual e integração proposta
 | Etapa | Problema hoje | O que o sistema resolve |
