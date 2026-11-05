@@ -141,12 +141,14 @@ flowchart TD
 ```
  
 ### 3.5 Problemas do processo atual e integração proposta
-| Etapa | Problema hoje | O que o sistema resolve |
+
+| Etapa | Problema atual | O que o sistema resolve |
 |---|---|---|
-| Cadastro | Dados só em papel | Cadastro único e consultável |
-| Pagamento | Conferência manual | Registro de pagamentos por matrícula, com status |
-| Avaliação | Sem histórico comparável | Histórico por frequentador |
-| Ficha | Versão vigente incerta | Fichas com data de criação/revisão e exercícios |
+| Cadastro | Dados dos alunos armazenados somente em fichas de papel, dificultando a consulta e atualização das informações. | Cadastro digital único, organizado e consultável. |
+| Pagamento | Conferência manual dos pagamentos, dificultando o controle dos vencimentos. | Registro dos pagamentos por matrícula, com datas e status de pagamento. |
+| Avaliação física | Ausência de histórico organizado para acompanhar a evolução dos alunos. | Armazenamento das avaliações físicas, permitindo consultar os registros anteriores. |
+| Ficha de treino | Dificuldade para identificar a ficha atualizada de cada aluno. | Armazenamento das fichas de treino com datas de criação e revisão, exercícios, séries e repetições. |
+| Matrícula | Dificuldade para acompanhar matrículas ativas, vencidas e renovações. | Controle das matrículas, com datas de início, vencimento e situação do aluno. |
  
 ---
  
