@@ -153,7 +153,7 @@ flowchart TD
     L -- Não --> M[Matrícula encerrada]
     K -- Não --> H
 
-'''
+```
  
 ### 3.5 Problemas do processo atual e integração proposta
 
@@ -181,7 +181,13 @@ CREATE DATABASE db_gym_list
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_0900_ai_ci;
 ```
- 
+
+**Repositório do projeto**: O código-fonte, o scripts SQL e relacionado ao desenvolvimento do banco de dados estão disponíveis no link abaixo.
+
+> [script](./docs/script.sql)
+
+
+
 ---
  
 ## 5. Requisitos
@@ -339,3 +345,16 @@ Resultado da análise: Código bem estruturado, com alguns pontos que precisam d
 | **Justificativa da escolha final** | Levei muito em consideração a forma como foi feita a primeira entrega então optei por levar mais tempo nessa sessão para garantir uma qualidade alta. |
 | **Reflexão crítica** | Acredito que para uma revisão e análise de código as IAs sempre são bem vindas, para otimização de tempo. |
 
+**Regras de negocio**
+Escrita
+
+| Item | Registro |
+| --- | --- |
+| **Ferramenta e etapa** | **Claude** — auxiliar na elaboração, organização e validação das regras de negócio do sistema X Personal Studio. |
+| **Motivação** | Como as regras de negócio são fundamentais para definir o funcionamento do sistema, optei por utilizar a IA como apoio para estruturar os processos e garantir que as etapas representassem corretamente a rotina de uma academia. |
+| **Prompts utilizados** | Com base na proposta do projeto X Personal Studio, ajude a identificar e estruturar as principais regras de negócio de um sistema de gerenciamento de academia. Considere os processos de cadastro de alunos, escolha de planos, pagamento, ativação e renovação de matrículas, avaliações físicas, elaboração de fichas de treino e acompanhamento dos alunos. Organize as regras de maneira clara e coerente, considerando as condições e os possíveis cenários de cada processo. |
+| **Resposta recebida** | Claude: Sugestão de um conjunto de regras de negócio para o X Personal Studio, contemplando o processo de matrícula, pagamentos, avaliações físicas, elaboração e revisão de fichas de treino, renovação e encerramento de matrículas. |
+| **Fontes consultadas e verificadas** | Foram utilizadas como referência as informações e os requisitos definidos para o projeto, além dos materiais de estudo sobre modelagem de banco de dados e levantamento de requisitos. |
+| **Trechos rejeitados ou corrigidos** | Algumas sugestões precisaram ser adaptadas para representar melhor a realidade dos processos definidos para a academia. Também foram ajustadas algumas condições para evitar ambiguidades no funcionamento das matrículas e dos planos. |
+| **Justificativa da escolha final** | Optei por aproveitar as sugestões que estavam de acordo com a proposta do projeto, realizando adaptações para manter a coerência entre as regras de negócio, os processos da academia e a futura implementação do banco de dados. |
+| **Reflexão crítica** | A utilização da IA foi útil para organizar as ideias e identificar situações que poderiam passar despercebidas durante a elaboração das regras de negócio. Entretanto, foi importante revisar as sugestões e tomar as decisões finais com base nos requisitos do projeto, evitando aceitar automaticamente todas as recomendações. |
