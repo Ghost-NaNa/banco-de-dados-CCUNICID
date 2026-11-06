@@ -612,5 +612,5 @@ O dicionário cobre SGBD, collation, versão, notação, expressões formais com
 | **Trechos rejeitados ou corrigidos** | Algumas sugestões foram adaptadas para representar melhor a realidade dos processos da academia, e algumas condições foram ajustadas para evitar ambiguidades no funcionamento das matrículas e dos planos. |
 | **Justificativa da escolha final** | Aproveitei as sugestões de acordo com a proposta do projeto, com adaptações para manter a coerência entre as regras, os processos da academia e a implementação do banco. |
 | **Reflexão crítica** | A IA foi útil para organizar ideias e identificar situações que poderiam passar despercebidas. Foi importante revisar as sugestões e decidir com base nos requisitos do projeto, sem aceitar automaticamente todas as recomendações. |
-
+| **Ferramenta usada para HTML** | **Claude**: Para o refinamento e a correção do código. |
 ---
