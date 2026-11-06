@@ -208,6 +208,7 @@ DELIMITER ;
 
 -- ================================================================
 -- INSERT INTO: CARGA DE DADOS SINTETICOS
+
 -- ================================================================
 START TRANSACTION;
 INSERT INTO plano (id_plano, nome, duracao_meses, valor, ativo) VALUES
@@ -2575,7 +2576,9 @@ SELECT
 FROM frequentador f
 JOIN matricula m ON m.id_frequentador=f.id_frequentador
 JOIN plano p ON p.id_plano=m.id_plano;
+
 -- J02: fichas e exercicios
+
 SELECT
     f.nome AS frequentador,
     ft.id_ficha,
@@ -2601,6 +2604,7 @@ JOIN exercicio e ON e.id_exercicio=fe.id_exercicio;
 -- DEMONSTRACAO DE UPDATE E DELETE (sem afetar a massa definitiva)
 -- Usa transacao e ROLLBACK para preservar todos os registros de teste.
 -- ================================================================
+
 START TRANSACTION;
 
 -- UPDATE: exemplo de inativacao de frequentador (RN18).
@@ -2619,6 +2623,7 @@ ROLLBACK;
 -- ================================================================
 -- G01 — Quais frequentadores possuem pagamentos em atraso?
 -- Atende: RF05; P3 (controle de inadimplencia).
+
 SELECT
     f.id_frequentador,
     f.nome,
@@ -2631,10 +2636,10 @@ JOIN frequentador f ON f.id_frequentador=m.id_frequentador
 WHERE pg.status='atrasado'
     OR (pg.status='pendente'
     AND pg.data_vencimento<CURDATE());
--- G02: Quais matriculas vencem nos proximos 30 dias? Atende: RF05.
--- 30 dias e parametro de consulta demonstrativo, nao prazo estabelecido pela academia.
+
 -- G02 — Quais matriculas vencem nos proximos 30 dias?
 -- Atende: RF05; P3 (controle de vencimentos).
+
 SELECT
     f.nome,
     m.id_matricula,
@@ -2646,9 +2651,10 @@ JOIN plano p ON p.id_plano=m.id_plano
 WHERE m.status='ativa'
     AND m.data_fim BETWEEN CURDATE()
     AND DATE_ADD(CURDATE(),INTERVAL 30 DAY);
--- G03: Qual o valor recebido por mes? Atende: controle financeiro RF04.
+
 -- G03 — Qual o valor recebido por mes?
 -- Atende: RF04; KPI de recebimento mensal.
+
 SELECT
     DATE_FORMAT(data_pagamento, '%Y-%m') AS mes,
     COUNT(*) AS pagamentos,
@@ -2657,18 +2663,20 @@ FROM pagamento
 WHERE status='pago' AND data_pagamento IS NOT NULL
 GROUP BY DATE_FORMAT(data_pagamento,'%Y-%m')
 ORDER BY mes;
--- G04: Quantas avaliacoes foram realizadas por mes? Atende: RF11/RF12.
+
 -- G04 — Quantas avaliacoes foram realizadas por mes?
 -- Atende: RF11/RF12; P2 (historico de avaliacoes).
+
 SELECT
     DATE_FORMAT(data_avaliacao, '%Y-%m') AS mes,
     COUNT(*) AS total_avaliacoes
 FROM avaliacao_fisica
 GROUP BY DATE_FORMAT(data_avaliacao,'%Y-%m')
 ORDER BY mes;
--- G05: Quantas fichas foram criadas por mes? Atende: RF09/RF12.
+
 -- G05 — Quantas fichas foram criadas por mes?
 -- Atende: RF09/RF12; P1 (historico de fichas).
+
 SELECT
     DATE_FORMAT(data_criacao, '%Y-%m') AS mes,
     COUNT(*) AS total_fichas
@@ -2677,39 +2685,43 @@ GROUP BY DATE_FORMAT(data_criacao,'%Y-%m')
 ORDER BY mes;
 
 -- AUDITORIA
--- A01: Existe matricula ativa com data final passada? Verifica: RN06.
 -- A01 — Existem matriculas ativas com prazo encerrado?
 -- Verifica: RN06.
+
 SELECT
     id_matricula,
     id_frequentador,
     data_fim FROM matricula
 WHERE status='ativa' AND data_fim<CURDATE();
--- A02: Existe pagamento pendente vencido? Verifica: RN09.
+
 -- A02 — Existem pagamentos pendentes com vencimento ultrapassado?
 -- Verifica: RN09.
+
 SELECT
     id_pagamento,
     id_matricula,
     data_vencimento FROM pagamento
 WHERE status='pendente' AND data_vencimento<CURDATE();
--- A03: Existe ficha sem exercicios? Verifica: RN14.
+
 -- A03 — Existem fichas de treino sem exercicios?
 -- Verifica: RN14.
+
 SELECT
     ft.id_ficha FROM ficha_treino ft
 LEFT JOIN ficha_exercicio fe ON fe.id_ficha=ft.id_ficha
 GROUP BY ft.id_ficha
 HAVING COUNT(fe.id_exercicio)=0;
--- A04: Existe pagamento marcado como pago sem data? Verifica: RN08.
+
 -- A04 — Existem pagamentos pagos sem data de pagamento?
 -- Verifica: RN08.
+
 SELECT
     id_pagamento FROM pagamento
 WHERE status='pago' AND data_pagamento IS NULL;
--- A05: Existe ficha atribuida a funcionario nao instrutor? Verifica: RN12.
+
 -- A05 — Existem fichas atribuídas a funcionarios nao instrutores?
 -- Verifica: RN12.
+
 SELECT
     ft.id_ficha,
     fu.cargo FROM ficha_treino ft

@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>X Personal Studio | Dicionário de Dados</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --red: #e10600;
+    --red-light: #ff3b30;
+    --red-soft: #ff6b63;
+    --dark: #050505;
+    --card: #121212;
+    --card-2: #1a1a1a;
+    --text: #ffffff;
+    --muted: #a3a3a3;
+    --border: rgba(255,255,255,0.09);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    background:
+        radial-gradient(circle at 80% 10%, rgba(225, 6, 0, 0.14), transparent 30%),
+        var(--dark);
+    color: var(--text);
+    line-height: 1.7;
+}
+
+:focus-visible { outline: 2px solid var(--red-soft); outline-offset: 2px; }
+
+/* SIDEBAR */
+.sidebar {
+    position: fixed; left: 0; top: 0;
+    width: 260px; height: 100vh; overflow-y: auto;
+    background: rgba(5, 5, 5, 0.96);
+    border-right: 1px solid var(--border);
+    padding: 30px 20px;
+    z-index: 1000;
+}
+.logo { display: flex; align-items: center; gap: 12px; margin-bottom: 35px; }
+.logo-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--red), var(--red-light));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 21px; font-weight: 800; color: #fff;
+}
+.logo-text { font-size: 15px; font-weight: 800; letter-spacing: -0.3px; line-height: 1.15; }
+.logo-text span { color: var(--red-light); display: block; }
+.menu-title { color: #7a7a7a; font-size: 12px; font-weight: 700; margin: 0 10px 10px; }
+.sidebar a {
+    display: block; padding: 9px 13px; margin: 3px 0;
+    color: var(--muted); text-decoration: none;
+    border-radius: 8px; font-size: 13px;
+}
+.sidebar a:hover { color: #fff; background: rgba(225, 6, 0, .15); }
+
+/* MAIN */
+.main { margin-left: 260px; padding: 0 50px 60px; }
+
+/* HERO */
+.hero {
+    min-height: 340px; display: flex; align-items: center;
+    border-bottom: 1px solid var(--border);
+}
+.hero-content { max-width: 850px; }
+.tag {
+    display: inline-block;
+    background: rgba(225, 6, 0, .12);
+    border: 1px solid rgba(225, 6, 0, .35);
+    color: var(--red-soft);
+    padding: 6px 14px; border-radius: 30px;
+    font-size: 12px; font-weight: 700; margin-bottom: 20px;
+}
+.hero h1 { font-size: clamp(38px, 5vw, 64px); line-height: 1.05; letter-spacing: -2px; margin-bottom: 20px; }
+.hero p { max-width: 700px; color: var(--muted); font-size: 16px; }
+
+/* SECTIONS */
+section { padding: 60px 0 10px; scroll-margin-top: 10px; }
+.section-header { margin-bottom: 26px; }
+h2 { font-size: 28px; letter-spacing: -0.5px; }
+h3.sub { font-size: 18px; margin: 36px 0 14px; }
+.section-description { color: var(--muted); margin-top: 7px; max-width: 800px; font-size: 15px; }
+.note { color: var(--muted); font-size: 13px; margin-top: 12px; max-width: 900px; }
+.note strong { color: #fff; }
+
+/* TABLES */
+.table-container {
+    width: 100%; overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 10px; background: var(--card);
+}
+table { width: 100%; min-width: 700px; border-collapse: collapse; }
+table.wide { min-width: 1020px; }
+th {
+    background: var(--card-2); color: var(--red-soft);
+    text-align: left; padding: 13px 16px;
+    font-size: 12px; font-weight: 700;
+    border-bottom: 1px solid var(--border);
+}
+td { padding: 12px 16px; color: #d4d4d4; font-size: 13px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(225, 6, 0, .05); }
+td:first-child { color: #fff; font-weight: 600; }
+
+/* FLUXO */
+.flow {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+    gap: 10px; padding: 30px 22px;
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+}
+.flow-item {
+    padding: 12px 16px; background: var(--card-2);
+    border: 1px solid rgba(225, 6, 0, .4);
+    border-radius: 8px; font-size: 12px; font-weight: 700; color: #fff; text-align: center;
+}
+.flow-item small { display: block; color: var(--muted); font-weight: 500; font-size: 11px; }
+.arrow { color: var(--red-light); font-size: 20px; font-weight: bold; }
+
+/* CODE */
+.code-box {
+    background: #000; border: 1px solid var(--border);
+    border-radius: 10px; overflow-x: auto;
+}
+pre { padding: 22px 26px; color: #ff8a84; font-family: Consolas, 'Courier New', monospace; font-size: 13px; line-height: 1.8; }
+.formal { margin-bottom: 18px; }
+.formal .reading { color: var(--muted); font-size: 13px; padding: 12px 26px 16px; border-top: 1px solid var(--border); }
+.formal .reading strong { color: #fff; }
+
+/* ENTITY */
+.entity-title { display: flex; align-items: center; gap: 12px; margin: 44px 0 6px; }
+.entity-icon {
+    width: 38px; height: 38px; border-radius: 9px;
+    background: rgba(225, 6, 0, .15);
+    border: 1px solid rgba(225, 6, 0, .4);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--red-soft); font-weight: 800; font-size: 13px;
+}
+.entity-title h3 { font-size: 19px; }
+.entity-sub { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+
+code {
+    background: rgba(225, 6, 0, .14); color: var(--red-soft);
+    padding: 3px 7px; border-radius: 5px;
+    font-family: Consolas, monospace; font-size: 12px; white-space: nowrap;
+}
+
+/* FOOTER */
+footer {
+    margin-top: 70px; padding: 30px; text-align: center;
+    border-top: 1px solid var(--border); color: #8a8a8a; font-size: 12px;
+}
+footer strong { color: var(--red-light); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .sidebar { position: relative; width: 100%; height: auto; padding: 18px; border-right: none; border-bottom: 1px solid var(--border); }
+    .logo { margin-bottom: 15px; }
+    .sidebar nav { display: flex; overflow-x: auto; gap: 5px; }
+    .sidebar a { white-space: nowrap; }
+    .menu-title { display: none; }
+    .main { margin-left: 0; padding: 0 20px 40px; }
+    .hero { min-height: 280px; }
+}
+@media (max-width: 600px) {
+    .flow { flex-direction: column; }
+    .arrow { transform: rotate(90deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+}
+</style>
+</head>
+
+<body>
+
+<aside class="sidebar">
+    <div class="logo">
+        <div class="logo-icon">X</div>
+        <div class="logo-text">Personal<span>Studio</span></div>
+    </div>
+
+    <div class="menu-title">Navegação</div>
+
+    <nav>
+        <a href="#sgbd">SGBD e versão</a>
+        <a href="#modelo">Modelo conceitual</a>
+        <a href="#fluxo">Fluxo de dados</a>
+        <a href="#notacao">Notação e convenções</a>
+        <a href="#estrutura">Estrutura formal</a>
+        <a href="#dicionario">Dicionário de dados</a>
+        <a href="#indices">Índices</a>
+        <a href="#log">Log e rastreabilidade</a>
+        <a href="#papeis">Papéis e LGPD</a>
+        <a href="#revisoes">Histórico de revisões</a>
+    </nav>
+</aside>
+
+<main class="main">
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="tag">Versão 2.0 · Entrega 2</div>
+            <h1>Dicionário de Dados</h1>
+            <p>
+                Banco de dados da X Personal Studio, academia de musculação em São Paulo - SP.
+                Documenta as 9 entidades do modelo, seus atributos, tipos físicos, restrições de
+                integridade, índices, log e permissões de acesso por perfil.
+            </p>
+        </div>
+    </header>
+
+    <!-- SGBD -->
+    <section id="sgbd">
+        <div class="section-header">
+            <h2>SGBD e versão</h2>
+            <p class="section-description">Ambiente em que o banco é implementado e versão deste documento.</p>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead><tr><th>Item</th><th>Definição</th></tr></thead>
+                <tbody>
+                    <tr><td>SGBD</td><td>MySQL 8.0</td></tr>
+                    <tr><td>Banco</td><td><code>db_gym_list</code></td></tr>
+                    <tr><td>Character set</td><td><code>utf8mb4</code></td></tr>
+                    <tr><td>Collation</td><td><code>utf8mb4_0900_ai_ci</code> — ignora acento e caixa ("José" = "jose")</td></tr>
+                    <tr><td>Motor</td><td>InnoDB (chaves estrangeiras e transações)</td></tr>
+                    <tr><td>Versão do dicionário</td><td>2.0 — novembro de 2026 (Entrega 2)</td></tr>
+                    <tr><td>Nomes</td><td>Atributos do modelo conceitual em maiúsculas, com prefixo (ex.: <code>NM_FREQUENTADOR</code>). Colunas físicas em minúsculas (ex.: <code>nome</code>), listadas ao lado de cada atributo.</td></tr>
+                    <tr><td>Dados de exemplo</td><td>Todos os dados de exemplo do projeto são fictícios (RN21).</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="code-box" style="margin-top:18px;">
+<pre>CREATE DATABASE db_gym_list
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_0900_ai_ci;</pre>
+        </div>
+    </section>
+
+    <!-- MODELO -->
+    <section id="modelo">
+        <div class="section-header">
+            <h2>Modelo conceitual</h2>
+            <p class="section-description">As nove entidades do modelo e os relacionamentos entre elas, com cardinalidade (mínima, máxima).</p>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead><tr><th>Entidade</th><th>Tabela</th><th>Descrição</th></tr></thead>
+                <tbody>
+                    <tr><td>FREQUENTADOR</td><td><code>frequentador</code></td><td>Pessoa física cadastrada que usa a academia. É a entidade central do modelo.</td></tr>
+                    <tr><td>PLANO</td><td><code>plano</code></td><td>Oferta comercial da academia, com duração e valor (mensal ou anual).</td></tr>
+                    <tr><td>MATRICULA</td><td><code>matricula</code></td><td>Vínculo de um frequentador com um plano em um período. Renovações geram novas matrículas.</td></tr>
+                    <tr><td>PAGAMENTO</td><td><code>pagamento</code></td><td>Cobrança associada a uma matrícula, com vencimento, valor, forma e status.</td></tr>
+                    <tr><td>FUNCIONARIO</td><td><code>funcionario</code></td><td>Profissional da academia que elabora fichas e conduz avaliações.</td></tr>
+                    <tr><td>AVALIACAO_FISICA</td><td><code>avaliacao_fisica</code></td><td>Medição periódica de um frequentador, mantida como histórico.</td></tr>
+                    <tr><td>FICHA_DE_TREINO</td><td><code>ficha_treino</code></td><td>Plano de treino de um frequentador, com objetivo e datas de criação e revisão.</td></tr>
+                    <tr><td>EXERCICIO</td><td><code>exercicio</code></td><td>Catálogo de exercícios reutilizáveis em várias fichas.</td></tr>
+                    <tr><td>FICHA_EXERCICIO</td><td><code>ficha_exercicio</code></td><td>Entidade associativa (N:N entre ficha e exercício) com séries, repetições, carga e ordem.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="sub">Relacionamentos</h3>
+
+        <div class="table-container">
+            <table>
+                <thead><tr><th>Relacionamento</th><th>Lado A</th><th>Lado B</th><th>Implementação no modelo lógico</th></tr></thead>
+                <tbody>
+                    <tr><td>FREQUENTADOR possui MATRICULA</td><td>FREQUENTADOR (0,N)</td><td>MATRICULA (1,1)</td><td><code>matricula.id_frequentador</code></td></tr>
+                    <tr><td>PLANO compõe MATRICULA</td><td>PLANO (0,N)</td><td>MATRICULA (1,1)</td><td><code>matricula.id_plano</code></td></tr>
+                    <tr><td>MATRICULA gera PAGAMENTO</td><td>MATRICULA (0,N)</td><td>PAGAMENTO (1,1)</td><td><code>pagamento.id_matricula</code></td></tr>
+                    <tr><td>FREQUENTADOR recebe FICHA_DE_TREINO</td><td>FREQUENTADOR (0,N)</td><td>FICHA_DE_TREINO (1,1)</td><td><code>ficha_treino.id_frequentador</code></td></tr>
+                    <tr><td>FUNCIONARIO elabora FICHA_DE_TREINO</td><td>FUNCIONARIO (0,N)</td><td>FICHA_DE_TREINO (1,1)</td><td><code>ficha_treino.id_funcionario</code></td></tr>
+                    <tr><td>FICHA_DE_TREINO contém EXERCICIO</td><td>FICHA_DE_TREINO (1,N)</td><td>EXERCICIO (0,N)</td><td>Tabela <code>ficha_exercicio</code> (PK composta e duas FKs)</td></tr>
+                    <tr><td>FREQUENTADOR realiza AVALIACAO_FISICA</td><td>FREQUENTADOR (0,N)</td><td>AVALIACAO_FISICA (1,1)</td><td><code>avaliacao_fisica.id_frequentador</code></td></tr>
+                    <tr><td>FUNCIONARIO conduz AVALIACAO_FISICA</td><td>FUNCIONARIO (0,N)</td><td>AVALIACAO_FISICA (1,1)</td><td><code>avaliacao_fisica.id_funcionario</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- FLUXO -->
+    <section id="fluxo">
+        <div class="section-header">
+            <h2>Fluxo de dados</h2>
+            <p class="section-description">Ordem em que os dados são criados ao longo da relação do frequentador com a academia.</p>
+        </div>
+
+        <div class="flow">
+            <div class="flow-item">FREQUENTADOR<small>cadastro</small></div>
+            <div class="arrow">→</div>
+            <div class="flow-item">PLANO<small>escolha</small></div>
+            <div class="arrow">→</div>
+            <div class="flow-item">MATRICULA<small>vínculo ativo</small></div>
+            <div class="arrow">→</div>
+            <div class="flow-item">PAGAMENTO<small>cobrança</small></div>
+            <div class="arrow">→</div>
+            <div class="flow-item">AVALIACAO_FISICA<small>histórico</small></div>
+            <div class="arrow">→</div>
+            <div class="flow-item">FICHA_DE_TREINO<small>com EXERCICIO</small></div>
+        </div>
+        <p class="note">Ao fim do período, a matrícula vence. Se o frequentador renova, uma nova matrícula é criada e o ciclo recomeça; a anterior permanece como histórico. Nova avaliação e revisão da ficha também recomeçam a partir da avaliação.</p>
+    </section>
+
+    <!-- NOTAÇÃO -->
+    <section id="notacao">
+        <div class="section-header">
+            <h2>Notação e convenções</h2>
+            <p class="section-description">Símbolos usados nas expressões formais e prefixos dos nomes de atributos.</p>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead><tr><th>Símbolo</th><th>Significado</th></tr></thead>
+                <tbody>
+                    <tr><td>=</td><td>É composto de</td></tr>
+                    <tr><td>+</td><td>E — conecta elementos obrigatórios</td></tr>
+                    <tr><td>( )</td><td>Elemento opcional</td></tr>
+                    <tr><td>{ } / n{ }m</td><td>Iteração com limite mínimo e máximo</td></tr>
+                    <tr><td>[ | ]</td><td>Escolha obrigatória entre alternativas</td></tr>
+                    <tr><td>/ /</td><td>Rótulo de um grupo repetitivo</td></tr>
+                    <tr><td>@</td><td>Identificador (chave primária)</td></tr>
+                    <tr><td>* *</td><td>Comentário fora da estrutura formal (usado para indicar chaves estrangeiras e unidades)</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="sub">Prefixos</h3>
+
+        <div class="table-container">
+            <table>
+                <thead><tr><th>Prefixo</th><th>Significado</th><th>Exemplo</th></tr></thead>
+                <tbody>
+                    <tr><td><code>ID_</code></td><td>Identificador (chave primária, chave estrangeira ou documento)</td><td><code>ID_FREQUENTADOR</code>, <code>ID_CPF</code></td></tr>
+                    <tr><td><code>NM_</code></td><td>Nome</td><td><code>NM_PLANO</code></td></tr>
+                    <tr><td><code>DT_</code></td><td>Data</td><td><code>DT_VENCIMENTO</code></td></tr>
+                    <tr><td><code>NR_</code></td><td>Número (telefone, ordem)</td><td><code>NR_TELEFONE</code></td></tr>
+                    <tr><td><code>QT_</code></td><td>Quantidade ou medida</td><td><code>QT_PESO</code></td></tr>
+                    <tr><td><code>VL_</code></td><td>Valor monetário</td><td><code>VL_PAGAMENTO</code></td></tr>
+                    <tr><td><code>TP_</code></td><td>Tipo ou categoria (domínio de valores)</td><td><code>TP_STATUS</code></td></tr>
+                    <tr><td><code>DS_</code></td><td>Descrição ou texto livre</td><td><code>DS_ESPECIALIDADE</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ESTRUTURA FORMAL -->
+    <section id="estrutura">
+        <div class="section-header">
+            <h2>Estrutura formal</h2>
+            <p class="section-description">Expressão formal de cada entidade, seguida de sua leitura em linguagem natural.</p>
+        </div>
+
+        <div class="formal code-box">
+<pre>FREQUENTADOR =
+  @ID_FREQUENTADOR +
+  NM_FREQUENTADOR +
+  ID_CPF +
+  DT_NASCIMENTO +
+  NR_TELEFONE +
+  (DS_FOTO) +
+  TP_SITUACAO</pre>
+            <div class="reading"><strong>Leitura:</strong> um frequentador é composto de um identificador único, nome, CPF, data de nascimento, telefone e situação (ativo ou inativo), e opcionalmente uma foto.</div>
+        </div>
+
+        <div class="formal code-box">
+<pre>PLANO =
+  @ID_PLANO +
+  NM_PLANO +
+  QT_DURACAO_MESES +
+  VL_PLANO +
+  TP_SITUACAO</pre>
+            <div class="reading"><strong>Leitura:</strong> um plano é composto de um identificador único, nome, duração em meses, valor e situação (ativo ou inativo).</div>
+        </div>
+
+        <div class="formal code-box">
+<pre>MATRICULA =
+  @ID_MATRICULA +
+  ID_FREQUENTADOR +   * FK → FREQUENTADOR *
+  ID_PLANO +          * FK → PLANO *
+  DT_INICIO +
+  DT_FINAL +
+  TP_STATUS</pre>
+            <div class="reading"><strong>Leitura:</strong> uma matrícula é composta de um identificador único, do frequentador, do plano, da data de início, da data final e do status. Todos são obrigatórios.</div>
+        </div>
+
+        <div class="formal code-box">
+<pre>PAGAMENTO =
+  @ID_PAGAMENTO +
+  ID_MATRICULA +      * FK → MATRICULA *
+  VL_PAGAMENTO +
+  DT_VENCIMENTO +
+  (DT_PAGAMENTO) +    * obrigatória quando TP_STATUS = pago *
+  (TP_FORMA_PAGAMENTO) +
+  TP_STATUS</pre>
+            <div class="reading"><strong>Leitura:</strong> um pagamento é composto de um identificador único, da matrícula, do valor cobrado, da data de vencimento e do status, e opcionalmente da data de pagamento e da forma de pagamento (preenchidas quando a cobrança é paga).</div>
+        </div>
+
+        <div class="formal code-box">
+<pre>FUNCIONARIO =
+  @ID_FUNCIONARIO +
+  NM_FUNCIONARIO +
+  ID_CPF +
+  TP_CARGO +
+  (DS_ESPECIALIDADE) +
+  DS_SENHA_HASH</pre>
+            <div class="reading"><strong>Leitura:</strong> um funcionário é composto de um identificador único, nome, CPF, cargo e senha armazenada em hash, e opcionalmente uma especialidade.</div>
+        </div>
+
+        <div class="formal code-box">
+<pre>AVALIACAO_FISICA =
+  @ID_AVALIACAO +
+  ID_FREQUENTADOR +   * FK → FREQUENTADOR *
+  ID_FUNCIONARIO +    * FK → FUNCIONARIO *
+  DT_AVALIACAO +
+  QT_PESO +           * kg *
+  QT_ALTURA +         * metros *
+  QT_PERCENTUAL_GORDURA +
+  (DS_OBSERVACOES_MEDICAS)</pre>
+            <div class="reading"><strong>Leitura:</strong> uma avaliação física é composta de um identificador único, do frequentador avaliado, do funcionário avaliador, da data, do peso, da altura e do percentual de gordura, e opcionalmente das observações médicas.</div>
+        </div>
+
+        <div class="formal code-box">
+<pre>FICHA_DE_TREINO =
+  @ID_FICHA_TREINO +
+  ID_FREQUENTADOR +   * FK → FREQUENTADOR *
+  ID_FUNCIONARIO +    * FK → FUNCIONARIO *
+  TP_OBJETIVO +
+  DT_CRIACAO +
+  (DT_REVISAO)</pre>
+            <div class="reading"><strong>Leitura:</strong> uma ficha de treino é composta de um identificador único, do frequentador, do funcionário responsável, do objetivo e da data de criação, e opcionalmente da data de revisão.</div>
+        </div>
+
+        <div class="formal code-box">
+<pre>EXERCICIO =
+  @ID_EXERCICIO +
+  NM_EXERCICIO +
+  TP_GRUPO_MUSCULAR</pre>
+            <div class="reading"><strong>Leitura:</strong> um exercício é composto de um identificador único, nome e grupo muscular.</div>
+        </div>
+
+        <div class="formal code-box">
+<pre>FICHA_EXERCICIO =
+  @ID_FICHA_TREINO +  * FK → FICHA_DE_TREINO *
+  @ID_EXERCICIO +     * FK → EXERCICIO *
+  QT_SERIES +
+  QT_REPETICOES +
+  (QT_CARGA) +        * kg *
+  NR_ORDEM</pre>
+            <div class="reading"><strong>Leitura:</strong> a participação de um exercício em uma ficha é identificada pela combinação de ficha e exercício, e é composta de séries, repetições e ordem de execução, e opcionalmente da carga (exercícios feitos sem carga não a informam).</div>
+        </div>
+    </section>
+
+    <!-- DICIONÁRIO -->
+    <section id="dicionario">
+        <div class="section-header">
+            <h2>Dicionário de dados</h2>
+            <p class="section-description">Para cada atributo: coluna física, tipo, obrigatoriedade, unicidade, valores permitidos, valor padrão e regra de negócio (RN) ou requisito (RF) que a restrição implementa.</p>
+        </div>
+
+        <!-- FREQUENTADOR -->
+        <div class="entity-title"><div class="entity-icon">FR</div><h3>FREQUENTADOR</h3></div>
+        <p class="entity-sub">Tabela <code>frequentador</code>. Frequentadores nunca são excluídos: são inativados (RN18).</p>
+        <div class="table-container">
+            <table class="wide">
+                <thead><tr><th>Atributo</th><th>Coluna</th><th>Tipo</th><th>Obrigatório</th><th>Único</th><th>Valores permitidos</th><th>Padrão</th><th>Descrição e regra</th></tr></thead>
+                <tbody>
+                    <tr><td>ID_FREQUENTADOR</td><td><code>id_frequentador</code></td><td>INT</td><td>Sim</td><td>PK</td><td>Inteiro positivo</td><td>Automático (AUTO_INCREMENT)</td><td>Identificador do frequentador (RNF02).</td></tr>
+                    <tr><td>NM_FREQUENTADOR</td><td><code>nome</code></td><td>VARCHAR(100)</td><td>Sim</td><td>Não</td><td>Texto não vazio</td><td>—</td><td>Nome completo (RF01).</td></tr>
+                    <tr><td>ID_CPF</td><td><code>cpf</code></td><td>CHAR(11)</td><td>Sim</td><td>Sim</td><td>11 dígitos, sem pontuação</td><td>—</td><td>CPF do frequentador, base do cadastro (RN01, RNF03).</td></tr>
+                    <tr><td>DT_NASCIMENTO</td><td><code>data_nascimento</code></td><td>DATE</td><td>Sim</td><td>Não</td><td>Data anterior à data atual</td><td>—</td><td>Data de nascimento (RF01).</td></tr>
+                    <tr><td>NR_TELEFONE</td><td><code>telefone</code></td><td>VARCHAR(15)</td><td>Sim</td><td>Não</td><td>DDD e número, apenas dígitos</td><td>—</td><td>Telefone de contato (RF01).</td></tr>
+                    <tr><td>DS_FOTO</td><td><code>foto</code></td><td>VARCHAR(255)</td><td>Não</td><td>Não</td><td>Caminho ou nome do arquivo de imagem</td><td>NULL</td><td>Foto do frequentador, registrada no cadastro (RF01).</td></tr>
+                    <tr><td>TP_SITUACAO</td><td><code>situacao</code></td><td>ENUM</td><td>Sim</td><td>Não</td><td><code>ativo</code>, <code>inativo</code></td><td><code>ativo</code></td><td>Situação do cadastro. Substitui a exclusão (RN18, RF13).</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="note"><strong>Dado derivado:</strong> o "pagamento em dia" do frequentador não é armazenado. Ele é calculado a partir de PAGAMENTO (consulta G03), para não duplicar informação.</p>
+
+        <!-- PLANO -->
+        <div class="entity-title"><div class="entity-icon">PL</div><h3>PLANO</h3></div>
+        <p class="entity-sub">Tabela <code>plano</code>. A academia oferece dois planos: mensal e anual.</p>
+        <div class="table-container">
+            <table class="wide">
+                <thead><tr><th>Atributo</th><th>Coluna</th><th>Tipo</th><th>Obrigatório</th><th>Único</th><th>Valores permitidos</th><th>Padrão</th><th>Descrição e regra</th></tr></thead>
+                <tbody>
+                    <tr><td>ID_PLANO</td><td><code>id_plano</code></td><td>INT</td><td>Sim</td><td>PK</td><td>Inteiro positivo</td><td>Automático (AUTO_INCREMENT)</td><td>Identificador do plano.</td></tr>
+                    <tr><td>NM_PLANO</td><td><code>nome</code></td><td>VARCHAR(50)</td><td>Sim</td><td>Sim</td><td>Texto não vazio (ex.: Mensal, Anual)</td><td>—</td><td>Nome comercial do plano (RF02).</td></tr>
+                    <tr><td>QT_DURACAO_MESES</td><td><code>duracao_meses</code></td><td>INT</td><td>Sim</td><td>Não</td><td>Maior que 0 (ex.: 1 para mensal, 12 para anual)</td><td>—</td><td>Duração do plano. Define a data final da matrícula (RF02).</td></tr>
+                    <tr><td>VL_PLANO</td><td><code>valor</code></td><td>DECIMAL(10,2)</td><td>Sim</td><td>Não</td><td>Maior que 0</td><td>—</td><td>Valor atual do plano. Cobranças passadas não mudam quando ele é reajustado (RN10).</td></tr>
+                    <tr><td>TP_SITUACAO</td><td><code>situacao</code></td><td>ENUM</td><td>Sim</td><td>Não</td><td><code>ativo</code>, <code>inativo</code></td><td><code>ativo</code></td><td>Plano inativo não aceita novas matrículas e não pode ser excluído se houver matrículas associadas (RN11).</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- MATRICULA -->
+        <div class="entity-title"><div class="entity-icon">MT</div><h3>MATRICULA</h3></div>
+        <p class="entity-sub">Tabela <code>matricula</code>. Um frequentador pode ter várias matrículas ao longo do tempo, mas no máximo uma com status ativa (RN03).</p>
+        <div class="table-container">
+            <table class="wide">
+                <thead><tr><th>Atributo</th><th>Coluna</th><th>Tipo</th><th>Obrigatório</th><th>Único</th><th>Valores permitidos</th><th>Padrão</th><th>Descrição e regra</th></tr></thead>
+                <tbody>
+                    <tr><td>ID_MATRICULA</td><td><code>id_matricula</code></td><td>INT</td><td>Sim</td><td>PK</td><td>Inteiro positivo</td><td>Automático (AUTO_INCREMENT)</td><td>Identificador da matrícula.</td></tr>
+                    <tr><td>ID_FREQUENTADOR</td><td><code>id_frequentador</code></td><td>INT</td><td>Sim</td><td>Não</td><td>FK → <code>frequentador</code>(<code>id_frequentador</code>)</td><td>—</td><td>Frequentador titular (RN02).</td></tr>
+                    <tr><td>ID_PLANO</td><td><code>id_plano</code></td><td>INT</td><td>Sim</td><td>Não</td><td>FK → <code>plano</code>(<code>id_plano</code>)</td><td>—</td><td>Plano contratado. Deve estar ativo ao criar a matrícula (RN02, RN11).</td></tr>
+                    <tr><td>DT_INICIO</td><td><code>data_inicio</code></td><td>DATE</td><td>Sim</td><td>Não</td><td>Data válida</td><td>—</td><td>Início da matrícula (RF03).</td></tr>
+                    <tr><td>DT_FINAL</td><td><code>data_fim</code></td><td>DATE</td><td>Sim</td><td>Não</td><td>Igual ou posterior a <code>data_inicio</code></td><td>—</td><td>Fim da matrícula: início mais a duração do plano. Passada sem renovação, a matrícula é considerada vencida (RN04, RN06).</td></tr>
+                    <tr><td>TP_STATUS</td><td><code>status</code></td><td>ENUM</td><td>Sim</td><td>Não</td><td><code>ativa</code>, <code>vencida</code>, <code>trancada</code>, <code>cancelada</code></td><td><code>ativa</code></td><td>Situação da matrícula (RN05, RF06).</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PAGAMENTO -->
+        <div class="entity-title"><div class="entity-icon">PG</div><h3>PAGAMENTO</h3></div>
+        <p class="entity-sub">Tabela <code>pagamento</code>. O plano mensal gera uma cobrança por mês e o anual, uma por ano.</p>
+        <div class="table-container">
+            <table class="wide">
+                <thead><tr><th>Atributo</th><th>Coluna</th><th>Tipo</th><th>Obrigatório</th><th>Único</th><th>Valores permitidos</th><th>Padrão</th><th>Descrição e regra</th></tr></thead>
+                <tbody>
+                    <tr><td>ID_PAGAMENTO</td><td><code>id_pagamento</code></td><td>INT</td><td>Sim</td><td>PK</td><td>Inteiro positivo</td><td>Automático (AUTO_INCREMENT)</td><td>Identificador da cobrança.</td></tr>
+                    <tr><td>ID_MATRICULA</td><td><code>id_matricula</code></td><td>INT</td><td>Sim</td><td>Não</td><td>FK → <code>matricula</code>(<code>id_matricula</code>)</td><td>—</td><td>Matrícula cobrada (RN07).</td></tr>
+                    <tr><td>VL_PAGAMENTO</td><td><code>valor</code></td><td>DECIMAL(10,2)</td><td>Sim</td><td>Não</td><td>Maior que 0</td><td>—</td><td>Valor registrado no momento da cobrança, mesmo que o plano mude depois (RN07, RN10).</td></tr>
+                    <tr><td>DT_VENCIMENTO</td><td><code>data_vencimento</code></td><td>DATE</td><td>Sim</td><td>Não</td><td>Data válida</td><td>—</td><td>Data limite para o pagamento (RF04).</td></tr>
+                    <tr><td>DT_PAGAMENTO</td><td><code>data_pagamento</code></td><td>DATE</td><td>Não</td><td>Não</td><td>Data válida; obrigatória quando <code>status</code> = <code>pago</code></td><td>NULL</td><td>Data em que a cobrança foi paga (RN08).</td></tr>
+                    <tr><td>TP_FORMA_PAGAMENTO</td><td><code>forma_pagamento</code></td><td>VARCHAR(20)</td><td>Não</td><td>Não</td><td>Texto curto (ex.: pix, dinheiro, cartão de crédito, cartão de débito)</td><td>NULL</td><td>Forma usada no pagamento, preenchida quando a cobrança é paga (RF04).</td></tr>
+                    <tr><td>TP_STATUS</td><td><code>status</code></td><td>ENUM</td><td>Sim</td><td>Não</td><td><code>pendente</code>, <code>pago</code>, <code>atrasado</code></td><td><code>pendente</code></td><td>Situação da cobrança. Pendente com vencimento passado é tratado como atrasado (RN08, RN09).</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- FUNCIONARIO -->
+        <div class="entity-title"><div class="entity-icon">FN</div><h3>FUNCIONARIO</h3></div>
+        <p class="entity-sub">Tabela <code>funcionario</code>. A academia tem 3 funcionários, todos instrutores, incluindo o dono.</p>
+        <div class="table-container">
+            <table class="wide">
+                <thead><tr><th>Atributo</th><th>Coluna</th><th>Tipo</th><th>Obrigatório</th><th>Único</th><th>Valores permitidos</th><th>Padrão</th><th>Descrição e regra</th></tr></thead>
+                <tbody>
+                    <tr><td>ID_FUNCIONARIO</td><td><code>id_funcionario</code></td><td>INT</td><td>Sim</td><td>PK</td><td>Inteiro positivo</td><td>Automático (AUTO_INCREMENT)</td><td>Identificador do funcionário.</td></tr>
+                    <tr><td>NM_FUNCIONARIO</td><td><code>nome</code></td><td>VARCHAR(100)</td><td>Sim</td><td>Não</td><td>Texto não vazio</td><td>—</td><td>Nome completo (RF07).</td></tr>
+                    <tr><td>ID_CPF</td><td><code>cpf</code></td><td>CHAR(11)</td><td>Sim</td><td>Sim</td><td>11 dígitos, sem pontuação</td><td>—</td><td>CPF do funcionário (RN01, RNF03).</td></tr>
+                    <tr><td>TP_CARGO</td><td><code>cargo</code></td><td>VARCHAR(30)</td><td>Sim</td><td>Não</td><td>Texto curto; <code>instrutor</code> para quem elabora fichas</td><td><code>instrutor</code></td><td>Função exercida. Só funcionário com cargo de instrutor elabora fichas (RN12, RF07).</td></tr>
+                    <tr><td>DS_ESPECIALIDADE</td><td><code>especialidade</code></td><td>VARCHAR(50)</td><td>Não</td><td>Não</td><td>Texto livre</td><td>NULL</td><td>Especialidade do instrutor (RF07).</td></tr>
+                    <tr><td>DS_SENHA_HASH</td><td><code>senha_hash</code></td><td>VARCHAR(255)</td><td>Sim</td><td>Não</td><td>Hash da senha; nunca texto puro</td><td>—</td><td>Credencial de acesso, armazenada somente em hash e nunca exibida (RN20, RNF01).</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- AVALIAÇÃO -->
+        <div class="entity-title"><div class="entity-icon">AF</div><h3>AVALIACAO_FISICA</h3></div>
+        <p class="entity-sub">Tabela <code>avaliacao_fisica</code>. Cada avaliação é um novo registro: as anteriores não são sobrescritas (RN16).</p>
+        <div class="table-container">
+            <table class="wide">
+                <thead><tr><th>Atributo</th><th>Coluna</th><th>Tipo</th><th>Obrigatório</th><th>Único</th><th>Valores permitidos</th><th>Padrão</th><th>Descrição e regra</th></tr></thead>
+                <tbody>
+                    <tr><td>ID_AVALIACAO</td><td><code>id_avaliacao</code></td><td>INT</td><td>Sim</td><td>PK</td><td>Inteiro positivo</td><td>Automático (AUTO_INCREMENT)</td><td>Identificador da avaliação.</td></tr>
+                    <tr><td>ID_FREQUENTADOR</td><td><code>id_frequentador</code></td><td>INT</td><td>Sim</td><td>Não</td><td>FK → <code>frequentador</code>(<code>id_frequentador</code>)</td><td>—</td><td>Frequentador avaliado (RN15).</td></tr>
+                    <tr><td>ID_FUNCIONARIO</td><td><code>id_funcionario</code></td><td>INT</td><td>Sim</td><td>Não</td><td>FK → <code>funcionario</code>(<code>id_funcionario</code>)</td><td>—</td><td>Funcionário que conduziu a avaliação (RN15).</td></tr>
+                    <tr><td>DT_AVALIACAO</td><td><code>data_avaliacao</code></td><td>DATE</td><td>Sim</td><td>Não</td><td>Data válida</td><td>Data atual</td><td>Data da avaliação (RF11).</td></tr>
+                    <tr><td>QT_PESO</td><td><code>peso</code></td><td>DECIMAL(5,2)</td><td>Sim</td><td>Não</td><td>Maior que 0 (kg)</td><td>—</td><td>Peso corporal em kg (RN17).</td></tr>
+                    <tr><td>QT_ALTURA</td><td><code>altura</code></td><td>DECIMAL(3,2)</td><td>Sim</td><td>Não</td><td>Maior que 0 (metros)</td><td>—</td><td>Altura em metros. O IMC não é armazenado: é calculado a partir de peso e altura (RN17).</td></tr>
+                    <tr><td>QT_PERCENTUAL_GORDURA</td><td><code>percentual_gordura</code></td><td>DECIMAL(5,2)</td><td>Sim</td><td>Não</td><td>De 0 a 100</td><td>—</td><td>Percentual de gordura corporal (RN17).</td></tr>
+                    <tr><td>DS_OBSERVACOES_MEDICAS</td><td><code>observacoes_medicas</code></td><td>TEXT</td><td>Não</td><td>Não</td><td>Texto livre</td><td>NULL</td><td>Observações do avaliador. Dado sensível: acesso restrito (RN19, RNF06).</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- FICHA -->
+        <div class="entity-title"><div class="entity-icon">FT</div><h3>FICHA_DE_TREINO</h3></div>
+        <p class="entity-sub">Tabela <code>ficha_treino</code>. Substitui a ficha em papel.</p>
+        <div class="table-container">
+            <table class="wide">
+                <thead><tr><th>Atributo</th><th>Coluna</th><th>Tipo</th><th>Obrigatório</th><th>Único</th><th>Valores permitidos</th><th>Padrão</th><th>Descrição e regra</th></tr></thead>
+                <tbody>
+                    <tr><td>ID_FICHA_TREINO</td><td><code>id_ficha</code></td><td>INT</td><td>Sim</td><td>PK</td><td>Inteiro positivo</td><td>Automático (AUTO_INCREMENT)</td><td>Identificador da ficha.</td></tr>
+                    <tr><td>ID_FREQUENTADOR</td><td><code>id_frequentador</code></td><td>INT</td><td>Sim</td><td>Não</td><td>FK → <code>frequentador</code>(<code>id_frequentador</code>)</td><td>—</td><td>Toda ficha pertence a um frequentador (RN12).</td></tr>
+                    <tr><td>ID_FUNCIONARIO</td><td><code>id_funcionario</code></td><td>INT</td><td>Sim</td><td>Não</td><td>FK → <code>funcionario</code>(<code>id_funcionario</code>)</td><td>—</td><td>Instrutor que elaborou a ficha (RN12, RF09).</td></tr>
+                    <tr><td>TP_OBJETIVO</td><td><code>objetivo</code></td><td>VARCHAR(100)</td><td>Sim</td><td>Não</td><td>Texto curto (ex.: ganho de massa, emagrecimento, condicionamento, reabilitação); admite outros</td><td>—</td><td>Objetivo do treino informado pelo frequentador (RF09).</td></tr>
+                    <tr><td>DT_CRIACAO</td><td><code>data_criacao</code></td><td>DATE</td><td>Sim</td><td>Não</td><td>Data válida</td><td>Data atual</td><td>Data de criação da ficha (RF09).</td></tr>
+                    <tr><td>DT_REVISAO</td><td><code>data_revisao</code></td><td>DATE</td><td>Não</td><td>Não</td><td>Igual ou posterior a <code>data_criacao</code></td><td>NULL</td><td>Data da última revisão da ficha (RN13).</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- EXERCICIO -->
+        <div class="entity-title"><div class="entity-icon">EX</div><h3>EXERCICIO</h3></div>
+        <p class="entity-sub">Tabela <code>exercicio</code>. Catálogo reutilizado por várias fichas (RN14).</p>
+        <div class="table-container">
+            <table class="wide">
+                <thead><tr><th>Atributo</th><th>Coluna</th><th>Tipo</th><th>Obrigatório</th><th>Único</th><th>Valores permitidos</th><th>Padrão</th><th>Descrição e regra</th></tr></thead>
+                <tbody>
+                    <tr><td>ID_EXERCICIO</td><td><code>id_exercicio</code></td><td>INT</td><td>Sim</td><td>PK</td><td>Inteiro positivo</td><td>Automático (AUTO_INCREMENT)</td><td>Identificador do exercício.</td></tr>
+                    <tr><td>NM_EXERCICIO</td><td><code>nome</code></td><td>VARCHAR(80)</td><td>Sim</td><td>Não</td><td>Texto não vazio</td><td>—</td><td>Nome do exercício (RF08).</td></tr>
+                    <tr><td>TP_GRUPO_MUSCULAR</td><td><code>grupo_muscular</code></td><td>VARCHAR(40)</td><td>Sim</td><td>Não</td><td>Texto curto (ex.: peito, costas, pernas, ombros, braços, abdômen)</td><td>—</td><td>Grupo muscular trabalhado (RF08).</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- FICHA_EXERCICIO -->
+        <div class="entity-title"><div class="entity-icon">FE</div><h3>FICHA_EXERCICIO</h3></div>
+        <p class="entity-sub">Tabela <code>ficha_exercicio</code>. Entidade associativa entre ficha e exercício, com chave primária composta.</p>
+        <div class="table-container">
+            <table class="wide">
+                <thead><tr><th>Atributo</th><th>Coluna</th><th>Tipo</th><th>Obrigatório</th><th>Único</th><th>Valores permitidos</th><th>Padrão</th><th>Descrição e regra</th></tr></thead>
+                <tbody>
+                    <tr><td>ID_FICHA_TREINO</td><td><code>id_ficha</code></td><td>INT</td><td>Sim</td><td>PK (parte 1)</td><td>FK → <code>ficha_treino</code>(<code>id_ficha</code>)</td><td>—</td><td>Ficha que contém o exercício. Uma ficha tem um ou mais exercícios (RN14).</td></tr>
+                    <tr><td>ID_EXERCICIO</td><td><code>id_exercicio</code></td><td>INT</td><td>Sim</td><td>PK (parte 2)</td><td>FK → <code>exercicio</code>(<code>id_exercicio</code>)</td><td>—</td><td>Exercício da ficha. Não se repete na mesma ficha (RN14).</td></tr>
+                    <tr><td>QT_SERIES</td><td><code>series</code></td><td>INT</td><td>Sim</td><td>Não</td><td>Maior que 0</td><td>—</td><td>Número de séries (RF10).</td></tr>
+                    <tr><td>QT_REPETICOES</td><td><code>repeticoes</code></td><td>INT</td><td>Sim</td><td>Não</td><td>Maior que 0</td><td>—</td><td>Repetições por série (RF10).</td></tr>
+                    <tr><td>QT_CARGA</td><td><code>carga</code></td><td>DECIMAL(6,2)</td><td>Não</td><td>Não</td><td>Maior ou igual a 0 (kg)</td><td>NULL</td><td>Carga em kg. Fica vazia em exercícios sem carga (RF10).</td></tr>
+                    <tr><td>NR_ORDEM</td><td><code>ordem</code></td><td>INT</td><td>Sim</td><td>Não</td><td>Maior que 0</td><td>—</td><td>Posição do exercício na sequência da ficha (RF10).</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ÍNDICES -->
+    <section id="indices">
+        <div class="section-header">
+            <h2>Índices</h2>
+            <p class="section-description">Além das chaves primárias, os índices abaixo garantem unicidade e aceleram as consultas gerenciais (G) e de auditoria (A) do script. O InnoDB também cria índice automático para cada chave estrangeira.</p>
+        </div>
+
+        <div class="table-container">
+            <table class="wide">
+                <thead><tr><th>Tabela</th><th>Índice</th><th>Colunas</th><th>Tipo</th><th>Finalidade</th></tr></thead>
+                <tbody>
+                    <tr><td>todas</td><td><code>PRIMARY</code></td><td>chave primária de cada tabela</td><td>PK</td><td>Identificação única e integridade referencial (RNF02).</td></tr>
+                    <tr><td>frequentador</td><td><code>uq_frequentador_cpf</code></td><td><code>cpf</code></td><td>UNIQUE</td><td>CPF único (RN01, RNF03).</td></tr>
+                    <tr><td>funcionario</td><td><code>uq_funcionario_cpf</code></td><td><code>cpf</code></td><td>UNIQUE</td><td>CPF único (RN01, RNF03).</td></tr>
+                    <tr><td>plano</td><td><code>uq_plano_nome</code></td><td><code>nome</code></td><td>UNIQUE</td><td>Nome comercial único.</td></tr>
+                    <tr><td>matricula</td><td><code>idx_matricula_frequentador</code></td><td><code>id_frequentador</code>, <code>status</code></td><td>Comum</td><td>Matrículas de um frequentador e conferência da RN03 (A01, G12).</td></tr>
+                    <tr><td>matricula</td><td><code>idx_matricula_status_fim</code></td><td><code>status</code>, <code>data_fim</code></td><td>Comum</td><td>Matrículas a vencer e vencidas (G05, G06, A03).</td></tr>
+                    <tr><td>matricula</td><td><code>idx_matricula_plano</code></td><td><code>id_plano</code></td><td>Comum</td><td>Matrículas por plano (G04).</td></tr>
+                    <tr><td>pagamento</td><td><code>idx_pagamento_matricula</code></td><td><code>id_matricula</code></td><td>Comum</td><td>Pagamentos de uma matrícula.</td></tr>
+                    <tr><td>pagamento</td><td><code>idx_pagamento_status_venc</code></td><td><code>status</code>, <code>data_vencimento</code></td><td>Comum</td><td>Receita, inadimplência e atrasos (G01, G02, G03, A06).</td></tr>
+                    <tr><td>ficha_treino</td><td><code>idx_ficha_frequentador</code></td><td><code>id_frequentador</code>, <code>data_criacao</code></td><td>Comum</td><td>Histórico de fichas de um frequentador (G07).</td></tr>
+                    <tr><td>ficha_treino</td><td><code>idx_ficha_funcionario</code></td><td><code>id_funcionario</code></td><td>Comum</td><td>Fichas por instrutor (G09).</td></tr>
+                    <tr><td>ficha_treino</td><td><code>idx_ficha_revisao</code></td><td><code>data_revisao</code></td><td>Comum</td><td>Fichas sem revisão (G08).</td></tr>
+                    <tr><td>ficha_exercicio</td><td><code>idx_fe_exercicio</code></td><td><code>id_exercicio</code></td><td>Comum</td><td>Fichas que usam um exercício (a PK já cobre a busca por ficha).</td></tr>
+                    <tr><td>avaliacao_fisica</td><td><code>idx_avaliacao_freq_data</code></td><td><code>id_frequentador</code>, <code>data_avaliacao</code></td><td>Comum</td><td>Evolução e avaliação mais recente (G10, G11).</td></tr>
+                    <tr><td>avaliacao_fisica</td><td><code>idx_avaliacao_funcionario</code></td><td><code>id_funcionario</code></td><td>Comum</td><td>Avaliações por funcionário.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- LOG -->
+    <section id="log">
+        <div class="section-header">
+            <h2>Log e rastreabilidade</h2>
+            <p class="section-description">Datas armazenadas no próprio modelo e alterações críticas registradas em log de auditoria (RNF08).</p>
+        </div>
+
+        <h3 class="sub" style="margin-top:0;">Datas de rastreabilidade no modelo</h3>
+        <div class="table-container">
+            <table>
+                <thead><tr><th>Tabela</th><th>Colunas de data</th><th>O que registram</th></tr></thead>
+                <tbody>
+                    <tr><td>matricula</td><td><code>data_inicio</code>, <code>data_fim</code></td><td>Período de vigência de cada matrícula, formando o histórico de renovações.</td></tr>
+                    <tr><td>pagamento</td><td><code>data_vencimento</code>, <code>data_pagamento</code></td><td>Quando a cobrança vence e quando foi paga.</td></tr>
+                    <tr><td>ficha_treino</td><td><code>data_criacao</code>, <code>data_revisao</code></td><td>Quando a ficha foi criada e revisada.</td></tr>
+                    <tr><td>avaliacao_fisica</td><td><code>data_avaliacao</code></td><td>Quando cada avaliação foi realizada.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="sub">Alterações críticas registradas em log</h3>
+        <div class="table-container">
+            <table>
+                <thead><tr><th>Evento</th><th>Tabelas</th><th>Regra ou requisito</th></tr></thead>
+                <tbody>
+                    <tr><td>Mudança de status da matrícula (ativa, vencida, trancada, cancelada)</td><td>matricula</td><td>RF06, RN05</td></tr>
+                    <tr><td>Registro ou alteração de pagamento (valor, status, data, forma)</td><td>pagamento</td><td>RF04, RN08</td></tr>
+                    <tr><td>Inativação de frequentador ou plano</td><td>frequentador, plano</td><td>RF13, RN11, RN18</td></tr>
+                    <tr><td>Consulta e alteração de observações médicas</td><td>avaliacao_fisica</td><td>RN19, RNF06</td></tr>
+                    <tr><td>Criação de funcionário e troca de senha</td><td>funcionario</td><td>RN20</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="note">Cada registro de log guarda o usuário, a data e hora, a operação e os valores anterior e novo. Senhas nunca entram no log, nem em hash. O log é mantido pelo SGBD e pela aplicação e não é uma das 9 entidades do modelo.</p>
+    </section>
+
+    <!-- PAPÉIS -->
+    <section id="papeis">
+        <div class="section-header">
+            <h2>Papéis e LGPD</h2>
+            <p class="section-description">Quem pode executar cada operação e como cada dado pessoal é classificado (Lei 13.709/2018, RNF06).</p>
+        </div>
+
+        <h3 class="sub" style="margin-top:0;">Perfis de acesso</h3>
+        <div class="table-container">
+            <table>
+                <thead><tr><th>Perfil</th><th>Quem</th><th>Alcance</th></tr></thead>
+                <tbody>
+                    <tr><td>Administrador</td><td>O dono da academia</td><td>Todas as operações abaixo, incluindo gestão de planos e funcionários.</td></tr>
+                    <tr><td>Instrutor</td><td>Demais funcionários</td><td>Operação diária: cadastros, matrículas, pagamentos, avaliações e fichas.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 class="sub">Permissões por operação</h3>
+        <div class="table-container">
+            <table>
+                <thead><tr><th>Entidade</th><th>Administrador</th><th>Instrutor</th></tr></thead>
+                <tbody>
+                    <tr><td>FREQUENTADOR</td><td>C, R, U (inclui inativar)</td><td>C, R, U</td></tr>
+                    <tr><td>PLANO</td><td>C, R, U (inclui inativar)</td><td>R</td></tr>
+                    <tr><td>MATRICULA</td><td>C, R, U</td><td>C, R, U</td></tr>
+                    <tr><td>PAGAMENTO</td><td>C, R, U</td><td>C, R, U</td></tr>
+                    <tr><td>FUNCIONARIO</td><td>C, R, U</td><td>R (sem <code>senha_hash</code>); U apenas da própria senha</td></tr>
+                    <tr><td>AVALIACAO_FISICA</td><td>C, R, U (somente para corrigir erro de registro)</td><td>C, R</td></tr>
+                    <tr><td>FICHA_DE_TREINO</td><td>C, R, U</td><td>C, R, U</td></tr>
+                    <tr><td>EXERCICIO</td><td>C, R, U</td><td>C, R, U</td></tr>
+                    <tr><td>FICHA_EXERCICIO</td><td>C, R, U, D</td><td>C, R, U, D</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="note"><strong>C</strong> = criar, <strong>R</strong> = consultar, <strong>U</strong> = atualizar, <strong>D</strong> = excluir. Nenhum perfil exclui registros das demais tabelas: frequentadores e planos são inativados (RN11, RN18) e avaliações são mantidas como histórico (RN16). Só FICHA_EXERCICIO admite exclusão, para retirar um exercício de uma ficha.</p>
+
+        <h3 class="sub">Classificação dos dados (LGPD)</h3>
+        <div class="table-container">
+            <table>
+                <thead><tr><th>Dado</th><th>Tabela</th><th>Classificação</th><th>Tratamento</th></tr></thead>
+                <tbody>
+                    <tr><td>Nome, CPF, data de nascimento, telefone</td><td>frequentador, funcionario</td><td>Dado pessoal</td><td>Acesso apenas a perfis autorizados.</td></tr>
+                    <tr><td>Foto</td><td>frequentador</td><td>Dado pessoal</td><td>Usada apenas para identificação no cadastro.</td></tr>
+                    <tr><td>Valores, vencimentos e formas de pagamento</td><td>pagamento</td><td>Dado pessoal financeiro</td><td>Acesso apenas a perfis autorizados.</td></tr>
+                    <tr><td>Peso, altura, percentual de gordura</td><td>avaliacao_fisica</td><td>Dado pessoal relativo à saúde</td><td>Tratado com a mesma cautela do dado sensível.</td></tr>
+                    <tr><td>Observações médicas</td><td>avaliacao_fisica</td><td>Dado pessoal sensível (saúde)</td><td>Só instrutores e administrador podem consultar (RN19).</td></tr>
+                    <tr><td>Senha</td><td>funcionario</td><td>Credencial</td><td>Somente em hash, nunca exibida (RN20, RNF01).</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- REVISÕES -->
+    <section id="revisoes">
+        <div class="section-header">
+            <h2>Histórico de revisões</h2>
+            <p class="section-description">O que mudou da versão anterior (1.0, com 6 entidades) para a versão 2.0.</p>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead><tr><th>Item</th><th>Antes</th><th>Agora</th></tr></thead>
+                <tbody>
+                    <tr><td>Entidades</td><td>6 entidades, sem PAGAMENTO, EXERCICIO e FICHA_EXERCICIO</td><td>9 entidades, alinhadas ao DER e ao README</td></tr>
+                    <tr><td>Relacionamentos</td><td>FICHA_DE_TREINO "1:1 → N" com FREQUENTADOR e FREQUENTADOR "N:M" com AVALIACAO_FISICA</td><td>Todos 1:N, com cardinalidade (mín, máx) e FK correspondente</td></tr>
+                    <tr><td>FICHA_DE_TREINO</td><td>Sem funcionário responsável</td><td>Inclui <code>ID_FUNCIONARIO</code> e passa a registrar o objetivo como obrigatório (RN12, RF09)</td></tr>
+                    <tr><td>AVALIACAO_FISICA</td><td>Sem frequentador avaliado</td><td>Inclui <code>ID_FREQUENTADOR</code> (RN15)</td></tr>
+                    <tr><td>FREQUENTADOR</td><td>Continha <code>IN_PAGAMENTO_EM_DIA</code>, valor derivável de PAGAMENTO</td><td>Atributo removido (evita dependência transitiva, 3FN); incluídos nascimento, telefone, foto e situação (RF01, RN18)</td></tr>
+                    <tr><td>PLANO</td><td>Apenas o nome</td><td>Inclui duração em meses, valor e situação (RF02, RN10, RN11)</td></tr>
+                    <tr><td>MATRICULA</td><td><code>DT_FINAL</code> opcional; status Ativa, Suspensa, Cancelada ou Concluída</td><td><code>DT_FINAL</code> obrigatória (RN04, RN06); status ativa, vencida, trancada ou cancelada (RN05)</td></tr>
+                    <tr><td>FUNCIONARIO</td><td>Cargos "instrutor, recepcionista, gerente etc."</td><td>Cargo como texto curto, com <code>instrutor</code> como padrão, pois os 3 funcionários são instrutores (RN12)</td></tr>
+                    <tr><td>Fluxo de dados</td><td>Sem pagamento e com a ficha antes da avaliação</td><td>Ordem do processo real: cadastro, plano, matrícula, pagamento, avaliação e ficha</td></tr>
+                    <tr><td>Restrições</td><td>Obrigatoriedade e regra em texto livre</td><td>Tipo físico, obrigatoriedade, unicidade, valores permitidos e padrão por coluna</td></tr>
+                    <tr><td>Novas seções</td><td>—</td><td>SGBD e versão, leitura das expressões formais, índices, log e papéis (LGPD)</td></tr>
+                    <tr><td>Prefixos</td><td><code>CD_</code> e <code>IN_</code>, sem uso nas entidades</td><td>Removidos; incluídos <code>NR_</code> e <code>VL_</code></td></tr>
+                    <tr><td>Nome</td><td>"X Personal Studios"</td><td>"X Personal Studio"</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        <strong>X Personal Studio</strong><br>
+        Banco de dados <code>db_gym_list</code> · MySQL 8.0 · Dicionário de Dados v2.0
+    </footer>
+
+</main>
+
+</body>
+</html>
