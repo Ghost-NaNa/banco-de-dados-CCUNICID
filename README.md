@@ -614,3 +614,11 @@ O dicionário cobre SGBD, collation, versão, notação, expressões formais com
 | **Reflexão crítica** | A IA foi útil para organizar ideias e identificar situações que poderiam passar despercebidas. Foi importante revisar as sugestões e decidir com base nos requisitos do projeto, sem aceitar automaticamente todas as recomendações. |
 | **Ferramenta usada para HTML** | **Claude**: Para o refinamento e a correção do código, e escolha das cores utilizada. |
 ---
+
+## 7. Apresentação Corporativa Final
+
+A apresentação final do projeto X Personal Studio — Modelagem de Banco de Dados, referente à Entrega 2, está disponível no YouTube. O vídeo registra a exposição do trabalho desenvolvido pelo grupo.
+
+Vídeo da apresentação: "Assistir à apresentação final no YouTube" (https://youtu.be/5JBeOh3ZlRE?is=UjeNthFA70Bn_Eyh)
+
+---
